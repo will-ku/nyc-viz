@@ -6,15 +6,21 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script type="text/javascript" src="./bundle.js"></script>
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/application.css" />
     <link rel="stylesheet" href="./styles/map.css" />
+    <link rel="stylesheet" href="./styles/line_graph.css" />
   </head>
   <body>
     <main id="main">
-      <svg width="500" height="720"></svg>
-      <div id="neighborhoodPopover"></div>
+      <section class="map-container">
+        <svg width="500" height="720"></svg>
+        <div id="neighborhoodPopover"></div>
+      </section>
+      <section class="line-graph">
+        <div id="map-form">dropdown goes here</div>
+        
+      </section>
     </main>
-    <div class="main-container">
-      <div class="nyc-map-container"></div>
-    </div>
   </body>
 </html>

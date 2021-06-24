@@ -1,18 +1,19 @@
-path {
-  stroke: #fff;
+.map-container path {
+  stroke: rgb(238, 238, 238);
   stroke-width: 0.5;
   stroke-dasharray: 1;
-  fill: #afafaf;
+  fill: #cecece;
 }
 
 #neighborhoodPopover {
   position: absolute;
   text-align: center;
-  padding: 2px;
+  padding: 3px;
   font: 12px sans-serif;
+  /* font-weight: 700; */
   background: #fff;
   border: 0px;
-  border-radius: 8px;
+  border-radius: 5px;
   pointer-events: none;
   opacity: 0;
 }

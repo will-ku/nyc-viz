@@ -1,0 +1,14 @@
+.line-graph {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+.plot-axis .line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}

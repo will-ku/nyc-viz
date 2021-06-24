@@ -23,8 +23,8 @@ const renderMap = () => {
       .append("path")
       .attr("d", path)
       .on("mouseenter", function (d) {
-        console.log(d);
-        // debugger;
+        // console.log(d);
+
         const neighborhood = this.__data__.properties.neighborhood;
         d3.select(this).style("stroke-width", 1.5).style("stroke-dasharray", 0);
 
@@ -36,6 +36,7 @@ const renderMap = () => {
           .text(neighborhood);
       })
       .on("mouseleave", function (d) {
+        // console.log(d);
         d3.select(this)
           .style("stroke-width", 0.25)
           .style("stroke-dasharray", 1);
@@ -44,8 +45,7 @@ const renderMap = () => {
           .transition()
           .style("opacity", 0);
       });
-
-    console.log(nyc);
+    // console.log(nyc);
   });
 };
 
