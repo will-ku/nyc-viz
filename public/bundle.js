@@ -979,7 +979,23 @@ const axios = __webpack_require__(10);
 
 document.addEventListener("DOMContentLoaded", () => {
   Object(__WEBPACK_IMPORTED_MODULE_0__map_js__["a" /* default */])();
-  Object(__WEBPACK_IMPORTED_MODULE_1__line_graph__["a" /* nycLineGraph */])();
+  Object(__WEBPACK_IMPORTED_MODULE_1__line_graph__["a" /* boroughLineGraph */])();
+
+  const lineGraphDropdown = document.querySelector("#line-graph-dropdown");
+  lineGraphDropdown.addEventListener("change", () => {
+    // function removeAllChildren(parent) {
+    //   while (parent.firstChild) {
+    //     parent.removeChild(parent.firstChild);
+    //   }
+    // }
+    // removeAllChildren(lineGraphDropdown);
+    const currLineGraph = document.querySelector(".curr-line-graph");
+    currLineGraph.remove();
+
+    Object(__WEBPACK_IMPORTED_MODULE_1__line_graph__["a" /* boroughLineGraph */])(
+      lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
+    );
+  });
 });
 
 
@@ -2061,9 +2077,16 @@ const renderMap = () => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-const boroughDropDown = null;
+const boroughs = [
+  "NYC",
+  "Brooklyn",
+  "Manhattan",
+  "Queens",
+  "Bronx",
+  "Staten Island",
+];
 
-const nycLineGraph = () =>
+const boroughLineGraph = (area = "NYC") =>
   d3
     .csv(
       "https://gist.githubusercontent.com/will-ku/87dc16f167af2d117ada33035c425d17/raw/08c396370ad39588f38fd6c79f6b1252d4def2e6/medianSalesPrice_All.csv"
@@ -2076,9 +2099,8 @@ const nycLineGraph = () =>
 
       // find a particular object aka neighborhood or area (ex: just NYC)
       for (let i = 0; i < allData.length; i++) {
-        if (allData[i].areaName === "NYC") nycPrices = allData[i];
+        if (allData[i].areaName === `${area}`) nycPrices = allData[i];
       }
-
       // removing extra k-v pairs that won't be shown on the line graph
       delete nycPrices["areaName"];
       delete nycPrices["Borough"];
@@ -2091,7 +2113,7 @@ const nycLineGraph = () =>
           value: parseInt(entry[1]),
         };
       });
-      const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+      const margin = { top: 20, right: 30, bottom: 45, left: 55 };
       const height = 600;
       const width = 600;
 
@@ -2103,19 +2125,6 @@ const nycLineGraph = () =>
         const b = data[index];
         return b && date - a.date > b.date - date ? b : a;
       };
-
-      // function bisect() {
-      //   const bisect = d3.bisector((d) => d.date).left;
-      //   // debugger;
-      //   return (mx) => {
-      //     // debugger;
-      //     const date = x.invert(mx);
-      //     const index = bisect(data, date, 1);
-      //     const a = data[index - 1];
-      //     const b = data[index];
-      //     return b && date - a.date > b.date - date ? b : a;
-      //   };
-      // }
 
       function formatDate(date) {
         return date.toLocaleString("en", {
@@ -2194,6 +2203,21 @@ const nycLineGraph = () =>
               .text(data.y)
           );
 
+      d3.select("#line-graph-dropdown")
+        .selectAll("myOptions")
+        .data(boroughs)
+        .enter()
+        .append("option")
+        .attr("class", "curr-line-graph-options")
+        .text(function (d) {
+          return d;
+        }) // text showed in the menu
+        .attr("value", function (d) {
+          return d;
+        }); // corresponding value returned by the button
+
+      const myColor = d3.scaleOrdinal().domain(boroughs).range(d3.schemeSet2);
+
       const x = d3
         .scaleUtc()
         .domain(d3.extent(data, (d) => d.date))
@@ -2201,7 +2225,8 @@ const nycLineGraph = () =>
 
       const y = d3
         .scaleLinear()
-        .domain([0, d3.max(data, (d) => d.value)])
+        // .domain([0, d3.max(data, (d) => d.value)])
+        .domain([200000, 1500000])
         .nice()
         .range([height - margin.bottom, margin.top]);
 
@@ -2215,7 +2240,8 @@ const nycLineGraph = () =>
         const svg = d3
           .select(".line-graph")
           .append("svg")
-          .attr("viewBox", [0, 0, width, height]);
+          .attr("viewBox", [0, 0, width, height])
+          .attr("class", "curr-line-graph");
 
         svg.append("g").call(xAxis);
         svg.append("g").call(yAxis);
@@ -2233,11 +2259,10 @@ const nycLineGraph = () =>
 
         svg.on("touchmove mousemove", function (event) {
           const { date, value } = bisect(d3.pointer(event, this)[0]);
-          // debugger;
           tooltip.attr("transform", `translate(${x(date)},${y(value)})`).call(
             callout,
             `${formatValue(value)}
-${formatDate(date)}`
+        ${formatDate(date)}`
           );
         });
 
@@ -2247,8 +2272,43 @@ ${formatDate(date)}`
       }
       chart();
     });
-/* harmony export (immutable) */ __webpack_exports__["a"] = nycLineGraph;
+/* harmony export (immutable) */ __webpack_exports__["a"] = boroughLineGraph;
 
+
+// // A function that update the chart
+// export const update = (selectedBorough) => {
+//   // Create new data with the selection?
+//   const boroughFilter = boroughs.filter(function (d) {
+//     return d == selectedBorough;
+//   });
+//   // Give these new data to update line
+//   line
+//     .datum(boroughFilter)
+//     .transition()
+//     .duration(1000)
+//     .attr(
+//       "d",
+//       d3
+//         .line()
+//         .x(function (d) {
+//           return x(d.year);
+//         })
+//         .y(function (d) {
+//           return y(+d.n);
+//         })
+//     )
+//     .attr("stroke", function (d) {
+//       return myColor(boroughFilter);
+//     });
+// };
+
+// // When the button is changed, run the updateChart function
+// d3.select("#line-graph-dropdown").on("change", function (d) {
+//   // recover the option that has been chosen
+//   const selectedBorough = d3.select(this).property("value");
+//   // run the updateChart function with this selected option
+//   update(selectedBorough);
+// });
 
 
 /***/ })

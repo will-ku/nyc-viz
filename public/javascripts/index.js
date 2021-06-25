@@ -1,8 +1,24 @@
 const axios = require("axios");
 import renderMap from "./map.js";
-import { nycLineGraph } from "./line_graph";
+import { boroughLineGraph } from "./line_graph";
 
 document.addEventListener("DOMContentLoaded", () => {
   renderMap();
-  nycLineGraph();
+  boroughLineGraph();
+
+  const lineGraphDropdown = document.querySelector("#line-graph-dropdown");
+  lineGraphDropdown.addEventListener("change", () => {
+    // function removeAllChildren(parent) {
+    //   while (parent.firstChild) {
+    //     parent.removeChild(parent.firstChild);
+    //   }
+    // }
+    // removeAllChildren(lineGraphDropdown);
+    const currLineGraph = document.querySelector(".curr-line-graph");
+    currLineGraph.remove();
+
+    boroughLineGraph(
+      lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
+    );
+  });
 });
