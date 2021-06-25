@@ -24,7 +24,7 @@ const renderMap = () => {
       .attr("id", "map")
       .attr("d", path)
       .on("mouseenter", function (d) {
-        // console.log(d);
+        console.log(d);
 
         const neighborhood = this.__data__.properties.neighborhood;
         d3.select(this).style("stroke-width", 1.5).style("stroke-dasharray", 0);
