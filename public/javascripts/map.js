@@ -21,6 +21,7 @@ const renderMap = () => {
       .data(nyc.features)
       .enter()
       .append("path")
+      .attr("id", "map")
       .attr("d", path)
       .on("mouseenter", function (d) {
         // console.log(d);

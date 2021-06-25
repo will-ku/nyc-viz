@@ -14,21 +14,20 @@ export const boroughLineGraph = (area = "NYC") =>
     )
     .then((allData) => {
       let data = new Array();
-      let nycPriceRange;
       // define variable for what I'm interested in
-      let nycPrices;
+      let boroughPrices;
 
       // find a particular object aka neighborhood or area (ex: just NYC)
       for (let i = 0; i < allData.length; i++) {
-        if (allData[i].areaName === `${area}`) nycPrices = allData[i];
+        if (allData[i].areaName === `${area}`) boroughPrices = allData[i];
       }
       // removing extra k-v pairs that won't be shown on the line graph
-      delete nycPrices["areaName"];
-      delete nycPrices["Borough"];
-      delete nycPrices["areaType"];
+      delete boroughPrices["areaName"];
+      delete boroughPrices["Borough"];
+      delete boroughPrices["areaType"];
 
       // building data object
-      data = Object.entries(nycPrices).map((entry) => {
+      data = Object.entries(boroughPrices).map((entry) => {
         return {
           date: new Date(entry[0].replace(/-/g, "/")),
           value: parseInt(entry[1]),
