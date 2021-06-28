@@ -6,8 +6,8 @@ NYC Housing - At a Glance is a high level overview of the sale and rental prices
 # Functionality & MVP
 With the NYC Housing - At a Glance application, users will be able to:
 * View a map of New York City
-* Use a slider to view changes in median sales prices since 2010
-* Use a slider to view changes in median rental prices since 2010
+* View changes in median sales prices since 2010
+* View areas with the highest total sale volumes
 
 # Architecture and Technologies
 The project will be implemented with the following technologies:
@@ -19,3 +19,6 @@ The project will be implemented with the following technologies:
 * **Day 2:** Animate map of New York City, including breakdown by borough.
 * **Day 3:** Load CSV data into backend. Generate first chart.
 * **Day 4:** Generate additional charts.
+
+# Bonus Features
+* Rental information including median rent asking prices and total inventory
