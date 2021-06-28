@@ -2,14 +2,14 @@
   "name": "test",
   "version": "1.0.0",
   "description": "cors test",
-  "main": "app.js",
   "repository": "https://github.com/will-ku/nyc-real-estate",
   "license": "MIT",
   "directories": {
     "lib": "lib"
   },
   "engines": {
-    "node": "v10.13.0"
+    "node": "10.13.0",
+    "npm": "6.4.1"
   },
   "scripts": {
     "build": "webpack",
