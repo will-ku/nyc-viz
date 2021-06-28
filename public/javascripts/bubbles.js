@@ -37,11 +37,11 @@ export const salesVolume = (borough, numYears = 5) => {
       .reverse()
       .slice(0, 8);
 
-    console.log(nbhdVols);
-    console.log(highVolNbhd);
+    // console.log(nbhdVols);
+    // console.log(highVolNbhd);
 
-    const svg = d3.select("svg"),
-      width = +svg.attr("width"),
-      height = +svg.attr("height");
+    // const svg = d3.select("svg"),
+    //   width = +svg.attr("width"),
+    //   height = +svg.attr("height");
   });
 };

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -536,7 +536,7 @@ module.exports = function isCancel(value) {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(18);
+var normalizeHeaderName = __webpack_require__(19);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -632,7 +632,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
 
 /***/ }),
 /* 5 */
@@ -642,12 +642,12 @@ module.exports = defaults;
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(19);
-var cookies = __webpack_require__(21);
+var settle = __webpack_require__(20);
+var cookies = __webpack_require__(22);
 var buildURL = __webpack_require__(2);
-var buildFullPath = __webpack_require__(22);
-var parseHeaders = __webpack_require__(25);
-var isURLSameOrigin = __webpack_require__(26);
+var buildFullPath = __webpack_require__(23);
+var parseHeaders = __webpack_require__(26);
+var isURLSameOrigin = __webpack_require__(27);
 var createError = __webpack_require__(6);
 
 module.exports = function xhrAdapter(config) {
@@ -827,7 +827,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(20);
+var enhanceError = __webpack_require__(21);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -970,6 +970,63 @@ module.exports = Cancel;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__application__ = __webpack_require__(10);
+
+
+const salesVolume = (borough, numYears = 5) => {
+  // fetch sales volume data
+  d3.csv(
+    "https://gist.githubusercontent.com/will-ku/6738acd6b2988fc93d62166da77c7979/raw/3d7f1f8f20059270c5d555d9e54976aceb4555b0/recordSalesVolumeAll"
+  ).then((allData) => {
+    let data = new Array();
+    let boroughArr = new Array();
+    // find all neighborhoods in borough (argument) and push object into boroughArr
+    for (let i = 0; i < allData.length; i++) {
+      if (
+        allData[i].areaType === "neighborhood" &&
+        allData[i].Borough === `${borough}`
+      )
+        boroughArr.push(allData[i]);
+    }
+
+    // Convert each object in boroughArr to [areaName: sumOfMonthlyVolumes]
+    // Looks back # of years based on numYears argument
+    let nbhdVols = boroughArr.map((neighborhood) => {
+      let sliceVols = Object.entries(neighborhood).slice(
+        Object.entries(neighborhood).length - numYears * 12
+      );
+      let sumOfMonthlyVolumes = sliceVols.reduce(
+        (acc, curr) => acc + parseInt(curr[1]),
+        0
+      );
+      return [neighborhood.areaName, sumOfMonthlyVolumes];
+    });
+
+    // Sort by descending (highest) volume. Returns top 8
+    let highVolNbhd = nbhdVols
+      .sort((a, b) => {
+        return a[1] - b[1];
+      })
+      .reverse()
+      .slice(0, 8);
+
+    // console.log(nbhdVols);
+    // console.log(highVolNbhd);
+
+    // const svg = d3.select("svg"),
+    //   width = +svg.attr("width"),
+    //   height = +svg.attr("height");
+  });
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = salesVolume;
+
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 const boroughs = [
   "NYC",
   "Brooklyn",
@@ -983,21 +1040,21 @@ const boroughs = [
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__map_js__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sales_line_graph__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bubbles__ = __webpack_require__(32);
-const axios = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__map_js__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sales_line_graph__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bubbles__ = __webpack_require__(9);
+const axios = __webpack_require__(12);
 
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  Object(__WEBPACK_IMPORTED_MODULE_0__map_js__["a" /* default */])();
+  Object(__WEBPACK_IMPORTED_MODULE_0__map_js__["a" /* renderMap */])();
   Object(__WEBPACK_IMPORTED_MODULE_1__sales_line_graph__["a" /* medianSales */])();
   Object(__WEBPACK_IMPORTED_MODULE_2__bubbles__["a" /* salesVolume */])("Brooklyn");
 
@@ -1013,13 +1070,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(13);
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1027,7 +1084,7 @@ module.exports = __webpack_require__(12);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(1);
-var Axios = __webpack_require__(13);
+var Axios = __webpack_require__(14);
 var mergeConfig = __webpack_require__(7);
 var defaults = __webpack_require__(4);
 
@@ -1063,17 +1120,17 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(8);
-axios.CancelToken = __webpack_require__(27);
+axios.CancelToken = __webpack_require__(28);
 axios.isCancel = __webpack_require__(3);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(28);
+axios.spread = __webpack_require__(29);
 
 // Expose isAxiosError
-axios.isAxiosError = __webpack_require__(29);
+axios.isAxiosError = __webpack_require__(30);
 
 module.exports = axios;
 
@@ -1082,7 +1139,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1090,8 +1147,8 @@ module.exports.default = axios;
 
 var utils = __webpack_require__(0);
 var buildURL = __webpack_require__(2);
-var InterceptorManager = __webpack_require__(14);
-var dispatchRequest = __webpack_require__(15);
+var InterceptorManager = __webpack_require__(15);
+var dispatchRequest = __webpack_require__(16);
 var mergeConfig = __webpack_require__(7);
 
 /**
@@ -1184,7 +1241,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1243,14 +1300,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(16);
+var transformData = __webpack_require__(17);
 var isCancel = __webpack_require__(3);
 var defaults = __webpack_require__(4);
 
@@ -1329,7 +1386,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1356,7 +1413,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1546,7 +1603,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1565,7 +1622,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1597,7 +1654,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1646,7 +1703,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1706,14 +1763,14 @@ module.exports = (
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var isAbsoluteURL = __webpack_require__(23);
-var combineURLs = __webpack_require__(24);
+var isAbsoluteURL = __webpack_require__(24);
+var combineURLs = __webpack_require__(25);
 
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,
@@ -1733,7 +1790,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1754,7 +1811,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1775,7 +1832,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1835,7 +1892,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1910,7 +1967,7 @@ module.exports = (
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1974,7 +2031,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2008,7 +2065,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2026,10 +2083,13 @@ module.exports = function isAxiosError(payload) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubbles__ = __webpack_require__(9);
+
+
 const renderMap = () => {
   const svg = d3.select("svg"),
     width = +svg.attr("width"),
@@ -2048,6 +2108,34 @@ const renderMap = () => {
           .fitSize([width, height], nyc)
       );
 
+    const salesVolumeDummy = [
+      ["Bedford-Stuyvesant", 4177],
+      ["Sheepshead Bay", 3817],
+      ["East New York", 3491],
+      ["Williamsburg", 3236],
+      ["Park Slope", 2957],
+      ["East Flatbush", 2598],
+      ["Bay Ridge", 2311],
+      ["Midwood", 2204],
+    ];
+    // sales data in k:v pairs in obj
+    const salesVolumeDummyObj = {};
+    salesVolumeDummy.map((ele) => (salesVolumeDummyObj[ele[0]] = ele[1]));
+    // just neighborhood name in array
+    const salesVolumeNeighborhood = salesVolumeDummy.map((ele) => ele[0]);
+    // creating a new nyc array with sales volume data
+    const nycArrayWithVol = [];
+    nyc.features.map((nycFeature) => {
+      let updatedFeature = nycFeature;
+      let neighborhood = nycFeature.properties.neighborhood;
+
+      if (salesVolumeNeighborhood.includes(neighborhood)) {
+        updatedFeature["salesVol"] = salesVolumeDummyObj[neighborhood];
+        return nycArrayWithVol.push(nycFeature);
+      }
+    });
+
+    const radius = d3.scaleSqrt().domain([0, 5000]).range([0, 20]);
     svg
       .selectAll("path")
       .data(nyc.features)
@@ -2078,77 +2166,32 @@ const renderMap = () => {
           .transition()
           .style("opacity", 0);
       });
-    // console.log(nyc);
+
+    svg
+      .append("g")
+      .attr("class", "bubble")
+      .selectAll("circle")
+      .data(nycArrayWithVol)
+      .enter()
+      .append("circle")
+      .attr("transform", function (d) {
+        return "translate(" + path.centroid(d) + ")";
+      })
+      .attr("r", (d) => radius(d.salesVol));
+
+    // console.log(nycArrayWithVol);
   });
 };
+/* harmony export (immutable) */ __webpack_exports__["a"] = renderMap;
 
-/* harmony default export */ __webpack_exports__["a"] = (renderMap);
 
 
 /***/ }),
-/* 31 */,
 /* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__application__ = __webpack_require__(9);
-
-
-const salesVolume = (borough, numYears = 5) => {
-  // fetch sales volume data
-  d3.csv(
-    "https://gist.githubusercontent.com/will-ku/6738acd6b2988fc93d62166da77c7979/raw/3d7f1f8f20059270c5d555d9e54976aceb4555b0/recordSalesVolumeAll"
-  ).then((allData) => {
-    let data = new Array();
-    let boroughArr = new Array();
-    // find all neighborhoods in borough (argument) and push object into boroughArr
-    for (let i = 0; i < allData.length; i++) {
-      if (
-        allData[i].areaType === "neighborhood" &&
-        allData[i].Borough === `${borough}`
-      )
-        boroughArr.push(allData[i]);
-    }
-
-    // Convert each object in boroughArr to [areaName: sumOfMonthlyVolumes]
-    // Looks back # of years based on numYears argument
-    let nbhdVols = boroughArr.map((neighborhood) => {
-      let sliceVols = Object.entries(neighborhood).slice(
-        Object.entries(neighborhood).length - numYears * 12
-      );
-      let sumOfMonthlyVolumes = sliceVols.reduce(
-        (acc, curr) => acc + parseInt(curr[1]),
-        0
-      );
-      return [neighborhood.areaName, sumOfMonthlyVolumes];
-    });
-
-    // Sort by descending (highest) volume. Returns top 8
-    let highVolNbhd = nbhdVols
-      .sort((a, b) => {
-        return a[1] - b[1];
-      })
-      .reverse()
-      .slice(0, 8);
-
-    console.log(nbhdVols);
-    console.log(highVolNbhd);
-
-    const svg = d3.select("svg"),
-      width = +svg.attr("width"),
-      height = +svg.attr("height");
-  });
-};
-/* harmony export (immutable) */ __webpack_exports__["a"] = salesVolume;
-
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__application__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__application__ = __webpack_require__(10);
 
 
 const medianSales = (area = "NYC") =>

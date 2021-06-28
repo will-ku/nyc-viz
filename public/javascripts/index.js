@@ -1,5 +1,5 @@
 const axios = require("axios");
-import renderMap from "./map.js";
+import { renderMap } from "./map.js";
 import { medianSales } from "./sales_line_graph";
 import { salesVolume } from "./bubbles";
 

@@ -17,3 +17,10 @@
   pointer-events: none;
   opacity: 0;
 }
+
+.bubble {
+  fill-opacity: 0.5;
+  stroke: #fff;
+  fill: orange;
+  stroke-width: 0.5px;
+}
