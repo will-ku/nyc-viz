@@ -1,5 +1,5 @@
 import { salesVolume } from "./bubbles";
-import { nycMap, salesVolume } from "./application";
+import { nycMap, salesVolume } from "./util";
 
 export const renderMap = () => {
   Promise.all([d3.json(nycMap), d3.csv(salesVolume)]).then((promises) => {

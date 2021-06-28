@@ -1,14 +1,21 @@
-export const boroughs = [
-  "NYC",
-  "Brooklyn",
-  "Manhattan",
-  "Queens",
-  "Bronx",
-  "Staten Island",
-];
+import { boroughs } from "./util";
 
-export const nycMap =
-  "https://gist.githubusercontent.com/will-ku/785bea3f2d9faaf7aa90c5c101062426/raw/6904b8580c10c7f69037cf4d6090e6929f1de785/nyc.json";
-
-export const salesVolume =
-  "https://gist.githubusercontent.com/will-ku/6738acd6b2988fc93d62166da77c7979/raw/3d7f1f8f20059270c5d555d9e54976aceb4555b0/recordSalesVolumeAll";
+export const boroughDropdown = () => {
+  if (document.getElementsByClassName("curr-borough-dropdown").length === 6) {
+    null;
+  } else {
+    d3.select("#borough-dropdown")
+      .selectAll("myOptions")
+      .data(boroughs)
+      .enter()
+      .append("option")
+      .attr("class", "curr-borough-dropdown")
+      .text(function (d) {
+        if (d === "NYC") return "All New York City";
+        return d;
+      }) // text showed in the menu
+      .attr("value", function (d) {
+        return d;
+      }); // corresponding value returned by the button
+  }
+};

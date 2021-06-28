@@ -1,6 +1,6 @@
-import { boroughs, nycMap, salesVolume } from "./application";
+import { boroughs, nycMap, salesVolume, mappableNeighborhood } from "./util";
 
-export const appendBubblesToMap = (borough, numYears = 5) => {
+export const appendBubblesToMap = (borough = "NYC", numYears = 5) => {
   Promise.all([d3.json(nycMap), d3.csv(salesVolume)]).then((promises) => {
     const [nyc, salesVolumeData] = promises;
     let data = new Array();
@@ -41,6 +41,8 @@ export const appendBubblesToMap = (borough, numYears = 5) => {
       })
       .reverse()
       .slice(0, 8);
+
+    // console.log(highVolNbhdArr);
     // Object representation of high volume neighborhood array (highVolNbdhArr)
     const highVolNbhdObj = {};
     highVolNbhdArr.map((ele) => (highVolNbhdObj[ele[0]] = ele[1]));
@@ -60,7 +62,7 @@ export const appendBubblesToMap = (borough, numYears = 5) => {
         return highVolFeatures.push(nycFeature);
       }
     });
-
+    // console.log(highVolFeatures);
     const radius = d3.scaleSqrt().domain([0, 5000]).range([0, 20]);
     const svg = d3.select("#nyc-map"),
       width = +svg.attr("width"),
@@ -96,8 +98,8 @@ export const appendBubblesToMap = (borough, numYears = 5) => {
       })
       .attr("r", (d) => radius(d.salesVol))
       .on("mouseenter", function (d) {
-        console.log(d);
-        // debugger;
+        // console.log(d);
+
         const neighborhood = this.__data__.properties.neighborhood;
         const salesVol = this.__data__.salesVol;
         d3.select(this).style("stroke-width", 1.5).style("stroke-dasharray", 0);
@@ -125,7 +127,6 @@ export const appendBubblesToMap = (borough, numYears = 5) => {
           .transition()
           .style("opacity", 0)
           .text("")
-          .exit()
           .remove();
       });
   });

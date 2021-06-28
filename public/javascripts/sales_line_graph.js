@@ -1,4 +1,5 @@
-import { boroughs } from "./application";
+import { boroughDropdown } from "./application";
+import { boroughs } from "./util";
 
 export const medianSales = (area = "NYC") =>
   d3
@@ -105,6 +106,7 @@ export const medianSales = (area = "NYC") =>
         g
           .attr("transform", `translate(${margin.left},0)`)
           .call(d3.axisLeft(y))
+          .call(d3.axisLeft(y))
           .call((g) => g.select(".domain").remove())
           .call((g) =>
             g
@@ -116,24 +118,8 @@ export const medianSales = (area = "NYC") =>
               .text(data.y)
           );
 
-      if (
-        document.getElementsByClassName("curr-line-graph-options").length === 6
-      ) {
-        null;
-      } else {
-        d3.select("#line-graph-dropdown")
-          .selectAll("myOptions")
-          .data(boroughs)
-          .enter()
-          .append("option")
-          .attr("class", "curr-line-graph-options")
-          .text(function (d) {
-            return d;
-          }) // text showed in the menu
-          .attr("value", function (d) {
-            return d;
-          }); // corresponding value returned by the button
-      }
+
+
       const myColor = d3.scaleOrdinal().domain(boroughs).range(d3.schemeSet2);
 
       const x = d3
