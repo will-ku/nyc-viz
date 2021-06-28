@@ -973,24 +973,29 @@ module.exports = Cancel;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__application__ = __webpack_require__(10);
 
 
-const salesVolume = (borough, numYears = 5) => {
-  // fetch sales volume data
-  d3.csv(
-    "https://gist.githubusercontent.com/will-ku/6738acd6b2988fc93d62166da77c7979/raw/3d7f1f8f20059270c5d555d9e54976aceb4555b0/recordSalesVolumeAll"
-  ).then((allData) => {
+const appendBubblesToMap = (borough, numYears = 5) => {
+  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_0__application__["b" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_0__application__["c" /* salesVolume */])]).then((promises) => {
+    const [nyc, salesVolumeData] = promises;
     let data = new Array();
     let boroughArr = new Array();
+
     // find all neighborhoods in borough (argument) and push object into boroughArr
-    for (let i = 0; i < allData.length; i++) {
-      if (
-        allData[i].areaType === "neighborhood" &&
-        allData[i].Borough === `${borough}`
-      )
-        boroughArr.push(allData[i]);
+    for (let i = 0; i < salesVolumeData.length; i++) {
+      switch (borough) {
+        case "NYC":
+          if (salesVolumeData[i].areaType === "neighborhood")
+            boroughArr.push(salesVolumeData[i]);
+          break;
+        default:
+          if (
+            salesVolumeData[i].areaType === "neighborhood" &&
+            salesVolumeData[i].Borough === `${borough}`
+          )
+            boroughArr.push(salesVolumeData[i]);
+          break;
+      }
     }
 
-    // Convert each object in boroughArr to [areaName: sumOfMonthlyVolumes]
-    // Looks back # of years based on numYears argument
     let nbhdVols = boroughArr.map((neighborhood) => {
       let sliceVols = Object.entries(neighborhood).slice(
         Object.entries(neighborhood).length - numYears * 12
@@ -1002,23 +1007,103 @@ const salesVolume = (borough, numYears = 5) => {
       return [neighborhood.areaName, sumOfMonthlyVolumes];
     });
 
-    // Sort by descending (highest) volume. Returns top 8
-    let highVolNbhd = nbhdVols
+    // Sort by descending (highest) volume. Returns top 8 neighborhoods. Ex: [["Williamsburg, 1000"], ["Greenpoint, 500"]]
+    const highVolNbhdArr = nbhdVols
       .sort((a, b) => {
         return a[1] - b[1];
       })
       .reverse()
       .slice(0, 8);
+    // Object representation of high volume neighborhood array (highVolNbdhArr)
+    const highVolNbhdObj = {};
+    highVolNbhdArr.map((ele) => (highVolNbhdObj[ele[0]] = ele[1]));
+    // Array with just neighborhood names
+    let highVolNbhdNames = [];
+    highVolNbhdNames = highVolNbhdArr.map((ele) => ele[0]);
 
-    // console.log(nbhdVols);
-    // console.log(highVolNbhd);
+    // Array that will contain geo features. To be fed to d3 function to create bubbles
+    const highVolFeatures = [];
+    nyc.features.map((nycFeature) => {
+      let updatedFeature = nycFeature;
+      let neighborhood = nycFeature.properties.neighborhood;
+      if (highVolNbhdNames.includes(neighborhood)) {
+        {
+          updatedFeature["salesVol"] = highVolNbhdObj[neighborhood];
+        }
+        return highVolFeatures.push(nycFeature);
+      }
+    });
 
-    // const svg = d3.select("svg"),
-    //   width = +svg.attr("width"),
-    //   height = +svg.attr("height");
+    const radius = d3.scaleSqrt().domain([0, 5000]).range([0, 20]);
+    const svg = d3.select("#nyc-map"),
+      width = +svg.attr("width"),
+      height = +svg.attr("height");
+
+    const path = d3
+      .geoPath()
+      .projection(
+        d3
+          .geoConicConformal()
+          .parallels([33, 45])
+          .rotate([96, -39])
+          .fitSize([width, height], nyc)
+      );
+
+    svg
+      .selectAll("path")
+      .data(nyc.features)
+      .enter()
+      .append("path")
+      .attr("id", "map")
+      .attr("d", path);
+
+    svg
+      .append("g")
+      .attr("class", "bubble")
+      .selectAll("circle")
+      .data(highVolFeatures)
+      .enter()
+      .append("circle")
+      .attr("transform", function (d) {
+        return "translate(" + path.centroid(d) + ")";
+      })
+      .attr("r", (d) => radius(d.salesVol))
+      .on("mouseenter", function (d) {
+        console.log(d);
+        // debugger;
+        const neighborhood = this.__data__.properties.neighborhood;
+        const salesVol = this.__data__.salesVol;
+        d3.select(this).style("stroke-width", 1.5).style("stroke-dasharray", 0);
+
+        d3.select("#neighborhoodPopover")
+          .text("")
+          .style("opacity", 0)
+          .exit()
+          .remove();
+
+        d3.select("#bubblePopover")
+          .transition()
+          .style("opacity", 1)
+          .style("left", d.pageX + "px")
+          .style("top", d.pageY + "px")
+          .text(`${neighborhood}, Sales Volume: ${salesVol}`);
+      })
+      .on("mouseleave", function (d) {
+        // console.log(d);
+        d3.select(this)
+          .style("stroke-width", 0.25)
+          .style("stroke-dasharray", 1);
+
+        d3.select("#bubblePopoverountyText")
+          .transition()
+          .style("opacity", 0)
+          .text("")
+          .exit()
+          .remove();
+      });
   });
 };
-/* harmony export (immutable) */ __webpack_exports__["a"] = salesVolume;
+/* harmony export (immutable) */ __webpack_exports__["a"] = appendBubblesToMap;
 
 
 
@@ -1036,6 +1121,16 @@ const boroughs = [
   "Staten Island",
 ];
 /* harmony export (immutable) */ __webpack_exports__["a"] = boroughs;
+
+
+const nycMap =
+  "https://gist.githubusercontent.com/will-ku/785bea3f2d9faaf7aa90c5c101062426/raw/6904b8580c10c7f69037cf4d6090e6929f1de785/nyc.json";
+/* harmony export (immutable) */ __webpack_exports__["b"] = nycMap;
+
+
+const salesVolume =
+  "https://gist.githubusercontent.com/will-ku/6738acd6b2988fc93d62166da77c7979/raw/3d7f1f8f20059270c5d555d9e54976aceb4555b0/recordSalesVolumeAll";
+/* harmony export (immutable) */ __webpack_exports__["c"] = salesVolume;
 
 
 
@@ -1056,7 +1151,7 @@ const axios = __webpack_require__(12);
 document.addEventListener("DOMContentLoaded", () => {
   Object(__WEBPACK_IMPORTED_MODULE_0__map_js__["a" /* renderMap */])();
   Object(__WEBPACK_IMPORTED_MODULE_1__sales_line_graph__["a" /* medianSales */])();
-  Object(__WEBPACK_IMPORTED_MODULE_2__bubbles__["a" /* salesVolume */])("Brooklyn");
+  setTimeout(() => Object(__WEBPACK_IMPORTED_MODULE_2__bubbles__["a" /* appendBubblesToMap */])("Manhattan"), 100);
 
   const lineGraphDropdown = document.querySelector("#line-graph-dropdown");
   lineGraphDropdown.addEventListener("change", () => {
@@ -2088,16 +2183,18 @@ module.exports = function isAxiosError(payload) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubbles__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__application__ = __webpack_require__(10);
+
 
 
 const renderMap = () => {
-  const svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_1__application__["b" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_1__application__["c" /* salesVolume */])]).then((promises) => {
+    const [nyc, medianSales] = promises;
 
-  d3.json(
-    "https://gist.githubusercontent.com/will-ku/785bea3f2d9faaf7aa90c5c101062426/raw/6904b8580c10c7f69037cf4d6090e6929f1de785/nyc.json"
-  ).then(function (nyc) {
+    const svg = d3.select("#nyc-map"),
+      width = +svg.attr("width"),
+      height = +svg.attr("height");
+
     const path = d3
       .geoPath()
       .projection(
@@ -2108,33 +2205,6 @@ const renderMap = () => {
           .fitSize([width, height], nyc)
       );
 
-    const salesVolumeDummy = [
-      ["Bedford-Stuyvesant", 4177],
-      ["Sheepshead Bay", 3817],
-      ["East New York", 3491],
-      ["Williamsburg", 3236],
-      ["Park Slope", 2957],
-      ["East Flatbush", 2598],
-      ["Bay Ridge", 2311],
-      ["Midwood", 2204],
-    ];
-    // sales data in k:v pairs in obj
-    const salesVolumeDummyObj = {};
-    salesVolumeDummy.map((ele) => (salesVolumeDummyObj[ele[0]] = ele[1]));
-    // just neighborhood name in array
-    const salesVolumeNeighborhood = salesVolumeDummy.map((ele) => ele[0]);
-    // creating a new nyc array with sales volume data
-    const nycArrayWithVol = [];
-    nyc.features.map((nycFeature) => {
-      let updatedFeature = nycFeature;
-      let neighborhood = nycFeature.properties.neighborhood;
-
-      if (salesVolumeNeighborhood.includes(neighborhood)) {
-        updatedFeature["salesVol"] = salesVolumeDummyObj[neighborhood];
-        return nycArrayWithVol.push(nycFeature);
-      }
-    });
-
     const radius = d3.scaleSqrt().domain([0, 5000]).range([0, 20]);
     svg
       .selectAll("path")
@@ -2144,14 +2214,21 @@ const renderMap = () => {
       .attr("id", "map")
       .attr("d", path)
       .on("mouseenter", function (d) {
-        console.log(d);
+        // console.log(d);
 
         const neighborhood = this.__data__.properties.neighborhood;
         d3.select(this).style("stroke-width", 1.5).style("stroke-dasharray", 0);
 
+        d3.select("#bubblePopover")
+          .text("")
+          .style("opacity", 0)
+          .exit()
+          .remove();
+
         d3.select("#neighborhoodPopover")
           .transition()
           .style("opacity", 1)
+          .style("background-color", "white")
           .style("left", d.pageX + "px")
           .style("top", d.pageY + "px")
           .text(neighborhood);
@@ -2165,21 +2242,14 @@ const renderMap = () => {
         d3.select("#cneighborhoodPopoverountyText")
           .transition()
           .style("opacity", 0);
+
+        d3.select("#neighborhoodPopover")
+          .text("")
+          .style("opacity", 0)
+          .style("background-color", "transparent")
+          .exit()
+          .remove();
       });
-
-    svg
-      .append("g")
-      .attr("class", "bubble")
-      .selectAll("circle")
-      .data(nycArrayWithVol)
-      .enter()
-      .append("circle")
-      .attr("transform", function (d) {
-        return "translate(" + path.centroid(d) + ")";
-      })
-      .attr("r", (d) => radius(d.salesVol));
-
-    // console.log(nycArrayWithVol);
   });
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = renderMap;

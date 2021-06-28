@@ -24,3 +24,16 @@
   fill: orange;
   stroke-width: 0.5px;
 }
+
+#bubblePopover {
+  position: absolute;
+  text-align: center;
+  padding: 3px;
+  font: 12px sans-serif;
+  /* font-weight: 700; */
+  background: #fff;
+  border: 0px;
+  border-radius: 5px;
+  pointer-events: none;
+  opacity: 0;
+}
