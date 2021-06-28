@@ -1,37 +1,24 @@
-## Welcome to GitHub Pages
+# NYC Real Estate - At a Glance
 
-You can use the [editor on GitHub](https://github.com/will-ku/nyc-real-estate/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Background
+NYC Real Estate - At a Glance is a high level overview of the sale and rental prices in New York City since 2010. This project uses data visualization libraries such as D3 to provide an interactive way to consume the data.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# Functionality & MVP
+With the NYC Real Estate - At a Glance application, users will be able to:
+* View a map of New York City
+* View changes in median sales prices since 2010
+* View areas with the highest total sale volumes
 
-### Markdown
+# Architecture and Technologies
+The project will be implemented with the following technologies:
+* Javascript for rendering logic
+* D3.js for SVG rendering and animations
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+# Implementation Timeline
+* **Day 1:** Set up Node modules, including getting webpack up and running.
+* **Day 2:** Animate map of New York City, including breakdown by borough.
+* **Day 3:** Load CSV data into backend. Generate first chart.
+* **Day 4:** Generate additional charts.
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/will-ku/nyc-real-estate/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Bonus Features
+* Rental information including median rent asking prices and total inventory
