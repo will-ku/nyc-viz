@@ -31,7 +31,7 @@ export const appendBubblesToMap = (borough = "NYC", numYears = 5) => {
         (acc, curr) => acc + parseInt(curr[1]),
         0
       );
-      return [neighborhood.areaName, sumOfMonthlyVolumes];
+      return [mappableNeighborhood(neighborhood.areaName), sumOfMonthlyVolumes];
     });
 
     // Sort by descending (highest) volume. Returns top 8 neighborhoods. Ex: [["Williamsburg, 1000"], ["Greenpoint, 500"]]
@@ -42,7 +42,7 @@ export const appendBubblesToMap = (borough = "NYC", numYears = 5) => {
       .reverse()
       .slice(0, 8);
 
-    // console.log(highVolNbhdArr);
+    console.log(highVolNbhdArr);
     // Object representation of high volume neighborhood array (highVolNbdhArr)
     const highVolNbhdObj = {};
     highVolNbhdArr.map((ele) => (highVolNbhdObj[ele[0]] = ele[1]));

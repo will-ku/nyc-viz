@@ -1005,7 +1005,7 @@ module.exports = Cancel;
 
 
 const appendBubblesToMap = (borough = "NYC", numYears = 5) => {
-  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_0__util__["b" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_0__util__["c" /* salesVolume */])]).then((promises) => {
+  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_0__util__["c" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_0__util__["d" /* salesVolume */])]).then((promises) => {
     const [nyc, salesVolumeData] = promises;
     let data = new Array();
     let boroughArr = new Array();
@@ -1035,7 +1035,7 @@ const appendBubblesToMap = (borough = "NYC", numYears = 5) => {
         (acc, curr) => acc + parseInt(curr[1]),
         0
       );
-      return [neighborhood.areaName, sumOfMonthlyVolumes];
+      return [Object(__WEBPACK_IMPORTED_MODULE_0__util__["b" /* mappableNeighborhood */])(neighborhood.areaName), sumOfMonthlyVolumes];
     });
 
     // Sort by descending (highest) volume. Returns top 8 neighborhoods. Ex: [["Williamsburg, 1000"], ["Greenpoint, 500"]]
@@ -1046,7 +1046,7 @@ const appendBubblesToMap = (borough = "NYC", numYears = 5) => {
       .reverse()
       .slice(0, 8);
 
-    // console.log(highVolNbhdArr);
+    console.log(highVolNbhdArr);
     // Object representation of high volume neighborhood array (highVolNbdhArr)
     const highVolNbhdObj = {};
     highVolNbhdArr.map((ele) => (highVolNbhdObj[ele[0]] = ele[1]));
@@ -2197,13 +2197,12 @@ module.exports = function isAxiosError(payload) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubbles__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubbles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__bubbles__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util__ = __webpack_require__(33);
 
 
 
 const renderMap = () => {
-  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_1__util__["b" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_1__util__["c" /* salesVolume */])]).then((promises) => {
+  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_1__util__["c" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_1__util__["d" /* salesVolume */])]).then((promises) => {
     const [nyc, medianSales] = promises;
 
     const svg = d3.select("#nyc-map"),
@@ -2309,7 +2308,7 @@ const medianSales = (area = "NYC") =>
       });
       const margin = { top: 20, right: 30, bottom: 45, left: 55 };
       const height = 600;
-      const width = 600;
+      const width = 700;
 
       const bisect = function (mx) {
         const bisect = d3.bisector((d) => d.date).left;
@@ -2397,8 +2396,6 @@ const medianSales = (area = "NYC") =>
               .attr("font-weight", "bold")
               .text(data.y)
           );
-
-
 
       const myColor = d3.scaleOrdinal().domain(__WEBPACK_IMPORTED_MODULE_1__util__["a" /* boroughs */]).range(d3.schemeSet2);
 
@@ -2513,20 +2510,27 @@ const boroughs = [
 
 const nycMap =
   "https://gist.githubusercontent.com/will-ku/785bea3f2d9faaf7aa90c5c101062426/raw/6904b8580c10c7f69037cf4d6090e6929f1de785/nyc.json";
-/* harmony export (immutable) */ __webpack_exports__["b"] = nycMap;
+/* harmony export (immutable) */ __webpack_exports__["c"] = nycMap;
 
 
 const salesVolume =
   "https://gist.githubusercontent.com/will-ku/6738acd6b2988fc93d62166da77c7979/raw/3d7f1f8f20059270c5d555d9e54976aceb4555b0/recordSalesVolumeAll";
-/* harmony export (immutable) */ __webpack_exports__["c"] = salesVolume;
+/* harmony export (immutable) */ __webpack_exports__["d"] = salesVolume;
 
 
-const mappableNeighborhood = (name) => ({
-  "Midtown East": "Midtown",
-  "Midtown South": "Midtown",
-  "Midtown West": "Hell's Kitchen",
-});
-/* unused harmony export mappableNeighborhood */
+const mappableNeighborhood = (name) => {
+  switch (name) {
+    case "Midtown East":
+      return "Midtown";
+    case "Midtown South":
+      return "Midtown";
+    case "Midtown West":
+      return "Hell's Kitchen";
+    default:
+      return name;
+  }
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = mappableNeighborhood;
 
 
 

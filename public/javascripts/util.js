@@ -13,8 +13,15 @@ export const nycMap =
 export const salesVolume =
   "https://gist.githubusercontent.com/will-ku/6738acd6b2988fc93d62166da77c7979/raw/3d7f1f8f20059270c5d555d9e54976aceb4555b0/recordSalesVolumeAll";
 
-export const mappableNeighborhood = (name) => ({
-  "Midtown East": "Midtown",
-  "Midtown South": "Midtown",
-  "Midtown West": "Hell's Kitchen",
-});
+export const mappableNeighborhood = (name) => {
+  switch (name) {
+    case "Midtown East":
+      return "Midtown";
+    case "Midtown South":
+      return "Midtown";
+    case "Midtown West":
+      return "Hell's Kitchen";
+    default:
+      return name;
+  }
+};

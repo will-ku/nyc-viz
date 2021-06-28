@@ -29,7 +29,7 @@ export const medianSales = (area = "NYC") =>
       });
       const margin = { top: 20, right: 30, bottom: 45, left: 55 };
       const height = 600;
-      const width = 600;
+      const width = 700;
 
       const bisect = function (mx) {
         const bisect = d3.bisector((d) => d.date).left;
@@ -117,8 +117,6 @@ export const medianSales = (area = "NYC") =>
               .attr("font-weight", "bold")
               .text(data.y)
           );
-
-
 
       const myColor = d3.scaleOrdinal().domain(boroughs).range(d3.schemeSet2);
 
