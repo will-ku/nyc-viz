@@ -1,6 +1,10 @@
 import { boroughs, nycMap, salesVolume, mappableNeighborhood } from "./util";
 
-export const appendBubblesToMap = (borough = "NYC", numYears = 5) => {
+export const appendBubblesToMap = (
+  borough = "NYC",
+  numYears = 5,
+  numBubbles = 10
+) => {
   Promise.all([d3.json(nycMap), d3.csv(salesVolume)]).then((promises) => {
     const [nyc, salesVolumeData] = promises;
     let data = new Array();
@@ -40,9 +44,9 @@ export const appendBubblesToMap = (borough = "NYC", numYears = 5) => {
         return a[1] - b[1];
       })
       .reverse()
-      .slice(0, 8);
+      .slice(0, numBubbles);
 
-    console.log(highVolNbhdArr);
+    // console.log(highVolNbhdArr);
     // Object representation of high volume neighborhood array (highVolNbdhArr)
     const highVolNbhdObj = {};
     highVolNbhdArr.map((ele) => (highVolNbhdObj[ele[0]] = ele[1]));

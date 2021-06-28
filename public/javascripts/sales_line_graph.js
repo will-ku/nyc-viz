@@ -172,40 +172,14 @@ export const medianSales = (area = "NYC") =>
 
         return svg.node();
       }
+
+
       chart();
     });
 
-// // A function that update the chart
-// export const update = (selectedBorough) => {
-//   // Create new data with the selection?
-//   const boroughFilter = boroughs.filter(function (d) {
-//     return d == selectedBorough;
-//   });
-//   // Give these new data to update line
-//   line
-//     .datum(boroughFilter)
-//     .transition()
-//     .duration(1000)
-//     .attr(
-//       "d",
-//       d3
-//         .line()
-//         .x(function (d) {
-//           return x(d.year);
-//         })
-//         .y(function (d) {
-//           return y(+d.n);
-//         })
-//     )
-//     .attr("stroke", function (d) {
-//       return myColor(boroughFilter);
-//     });
-// };
+const salesFacts = () => {
+  const facts = document.querySelector(".facts")
 
-// // When the button is changed, run the updateChart function
-// d3.select("#line-graph-dropdown").on("change", function (d) {
-//   // recover the option that has been chosen
-//   const selectedBorough = d3.select(this).property("value");
-//   // run the updateChart function with this selected option
-//   update(selectedBorough);
-// });
+  
+
+}

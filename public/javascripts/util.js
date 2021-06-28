@@ -21,6 +21,8 @@ export const mappableNeighborhood = (name) => {
       return "Midtown";
     case "Midtown West":
       return "Hell's Kitchen";
+    case "South Jamaica":
+      return "Jamaica";
     default:
       return name;
   }
