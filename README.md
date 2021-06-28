@@ -1,10 +1,10 @@
-# NYC Housing - At a Glance
+# NYC Real Estate - At a Glance
 
 # Background
-NYC Housing - At a Glance is a high level overview of the sale and rental prices in New York City since 2010. This project uses data visualization libraries such as D3 to provide an interactive way to consume the data.
+NYC Real Estate - At a Glance is a high level overview of the sale and rental prices in New York City since 2010. This project uses data visualization libraries such as D3 to provide an interactive way to consume the data.
 
 # Functionality & MVP
-With the NYC Housing - At a Glance application, users will be able to:
+With the NYC Real Estate - At a Glance application, users will be able to:
 * View a map of New York City
 * View changes in median sales prices since 2010
 * View areas with the highest total sale volumes
