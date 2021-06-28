@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "node public/index.js",
+    "start": "node public/javascripts/index.js",
     "start:debug": "DEBUG=* node app.js"
   },
   "dependencies": {
