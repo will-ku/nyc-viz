@@ -13,9 +13,8 @@
   background-position: 50% 50%;
 }
 .cover-page h1 {
-  font-family: "DM Serif Display", serif;
   font-size: 10rem;
-  color: rgb(250, 250, 250);
+  color: white;
   /* text-shadow: 0 0 5px #00000007; */
 }
 
@@ -24,7 +23,6 @@
   width: 50ch;
   color: white;
   font-size: 1.2rem;
-  font-family: "Roboto Slab", serif;
   font-weight: 300;
   line-height: 1.2;
   text-shadow: 0 0 2px #000000;
@@ -44,6 +42,6 @@ header {
 }
 
 .content-page {
-  height: 100vh;
+  height: 95vh;
   display: flex;
 }
