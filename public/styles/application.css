@@ -38,5 +38,5 @@ header {
   height: 100vh;
   background-image: url("./splash_background_v2.jpg");
   background-size: cover;
-  background-position: 90%;
+  background-position: 50% 50%;
 }
