@@ -1,5 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap");
+
+.cover-page h1 {
+  font-family: "DM Serif Display", serif;
+  font-size: 10rem;
+  color: white;
+}
+
+.cover-page p {
+  text-align: center;
+  width: 50ch;
+  color: white;
+}
+
 main {
   display: flex;
+  flex-direction: column;
   margin: 1em;
   justify-content: space-around;
 }
@@ -8,4 +23,20 @@ header {
   display: flex;
   justify-content: center;
   padding-top: 0.5em;
+}
+
+.content-page {
+  height: 100vh;
+  display: flex;
+}
+
+.cover-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("./splash_background_v2.jpg");
+  background-size: cover;
+  background-position: 90%;
 }

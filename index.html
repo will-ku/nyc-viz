@@ -16,18 +16,28 @@
     <link rel="stylesheet" href="./public/styles/line_graph.css" />
   </head>
   <body>
-    <header>
-      <section><select id="borough-dropdown"></select></section>
-    </header>
+    <section class="cover-page">
+      <h1>NYC Viz</h1>
+      <p>
+        NYC Viz is a data visualization project that uses D3.js to provide a fun
+        way to interact with the absurdly high cost of living in New York City.
+        Historical monthly data is provided by StreetEasy.
+      </p>
+    </section>
     <main id="main">
-      <section class="map-container">
-        Highest sales volume over the past 5 years
-        <svg id="nyc-map" width="500" height="720"></svg>
-        <div id="neighborhoodPopover"></div>
-        <div id="bubblePopover"></div>
+      <header>
+        <section><select id="borough-dropdown"></select></section>
+      </header>
+      <section class="content-page">
+        <section class="map-container">
+          Highest sales volume over the past 5 years
+          <svg id="nyc-map" width="500" height="720"></svg>
+          <div id="neighborhoodPopover"></div>
+          <div id="bubblePopover"></div>
+        </section>
+        <section class="line-graph">Median sales price</section>
+        <div className="facts"></div>
       </section>
-      <section class="line-graph">Median sales price</section>
-      <div className="facts"></div>
     </main>
   </body>
 </html>
