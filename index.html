@@ -2,7 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title></title>
+    <link
+      rel="shortcut icon"
+      href="./public/styles/Paomedia-Small-N-Flat-House.svg"
+    />
+    <title>NYC Real Estate - At a Glance</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script type="text/javascript" src="./public/bundle.js"></script>
@@ -17,11 +21,12 @@
     </header>
     <main id="main">
       <section class="map-container">
+        Highest sales volume over the past 5 years
         <svg id="nyc-map" width="500" height="720"></svg>
         <div id="neighborhoodPopover"></div>
         <div id="bubblePopover"></div>
       </section>
-      <section class="line-graph"></section>
+      <section class="line-graph">Median sales price</section>
       <div className="facts"></div>
     </main>
   </body>
