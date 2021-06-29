@@ -1,9 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap");
 
+.cover-page {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("./splash_background_v3.jpg");
+  background-size: cover;
+  background-position: 50% 50%;
+}
 .cover-page h1 {
   font-family: "DM Serif Display", serif;
   font-size: 10rem;
-  color: white;
+  color: rgb(250, 250, 250);
+  /* text-shadow: 0 0 5px #00000007; */
 }
 
 .cover-page > p {
@@ -11,9 +24,10 @@
   width: 50ch;
   color: white;
   font-size: 1.2rem;
-  font-family: sans-serif;
+  font-family: "Roboto Slab", serif;
   font-weight: 300;
   line-height: 1.2;
+  text-shadow: 0 0 2px #000000;
 }
 
 main {
@@ -32,15 +46,4 @@ header {
 .content-page {
   height: 100vh;
   display: flex;
-}
-
-.cover-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-image: url("./splash_background_v2.jpg");
-  background-size: cover;
-  background-position: 50% 50%;
 }
