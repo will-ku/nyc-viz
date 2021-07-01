@@ -82,6 +82,11 @@ body,
   justify-content: space-around;
   width: 100%;
 }
+
+.content-container > * {
+  margin-top: 1rem;
+}
+
 .content-container {
   /* height: 100vh; */
   width: 100%;
@@ -104,7 +109,6 @@ body,
   -webkit-box-shadow: 0 6px 10px rgba(57, 63, 72, 0.03);
   -moz-box-shadow: 0 6px 10px rgba(57, 63, 72, 0.03);
   box-shadow: 0 6px 10px rgba(57, 63, 72, 0.03);
-  margin-bottom: 2rem;
 }
 
 .header-dropdown {
@@ -116,9 +120,9 @@ body,
   padding: 0;
   padding-left: 0.5rem;
   font-family: "DM Serif Display", serif;
-  appearance: none;
+  /* appearance: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
+  -moz-appearance: none; */
   text-decoration: underline;
   text-decoration-thickness: 0.1rem;
 }

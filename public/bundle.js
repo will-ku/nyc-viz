@@ -1062,8 +1062,6 @@ const appendBubblesToMap = (
       })
       .reverse()
       .slice(0, numBubbles);
-
-    // console.log(highVolNbhdArr);
     // Object representation of high volume neighborhood array (highVolNbdhArr)
     const highVolNbhdObj = {};
     highVolNbhdArr.map((ele) => (highVolNbhdObj[ele[0]] = ele[1]));
@@ -1187,6 +1185,25 @@ const boroughDropdown = () => {
 /* harmony export (immutable) */ __webpack_exports__["a"] = boroughDropdown;
 
 
+const hardcodedWidth = (borough) => {
+  switch (borough) {
+    case "NYC":
+      return "17ch";
+    case "Bronx":
+      return "11ch";
+    case "Brooklyn":
+      return "10ch";
+    case "Queens":
+      return "8.25ch";
+    case "Staten Island":
+      return "13.2ch";
+    default:
+      break;
+  }
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = hardcodedWidth;
+
+
 
 /***/ }),
 /* 12 */
@@ -1227,6 +1244,17 @@ document.addEventListener("DOMContentLoaded", () => {
         lineGraphFacts[i].removeChild(lineGraphFacts[i].lastElementChild);
       }
     }
+
+    // hardcodedWidth(
+    //   lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
+    // );
+
+    let headerDropDown = document.querySelector(".header-dropdown");
+    headerDropDown.style.width = Object(__WEBPACK_IMPORTED_MODULE_3__application__["b" /* hardcodedWidth */])(
+      lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
+    );
+    // headerDropDown.setAttribute("width", "2ch");
+    // debugger;
 
     Object(__WEBPACK_IMPORTED_MODULE_2__bubbles__["a" /* appendBubblesToMap */])(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
@@ -2548,16 +2576,6 @@ const medianSales = (area = "NYC", numYears) =>
                 (Math.abs(calculatedNum) / 1000000).toFixed(2) +
               "M";
       };
-      // const avgOf2021MedianSales =
-      //   "$" +
-      //   `${(
-      //     data
-      //       .slice(data.length - (data.length - 12 * (2021 - 2010))) // 11 stands for 2021 - 2010
-      //       .reduce((acc, d) => acc + d.value, 0) /
-      //     data.slice(data.length - (data.length - 12 * (2021 - 2010))).length /
-      //     1000
-      //   ).toFixed(0)}` +
-      //   "k";
 
       const lineGraphHeader = document.querySelector(".line-graph-header");
       lineGraphHeader.textContent = "Median Sales";
@@ -2587,10 +2605,6 @@ const medianSales = (area = "NYC", numYears) =>
     });
 /* harmony export (immutable) */ __webpack_exports__["a"] = medianSales;
 
-
-// const salesFacts = () => {
-//   const facts = document.querySelector(".facts");
-// };
 
 
 /***/ })

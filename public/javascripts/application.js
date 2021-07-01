@@ -20,3 +20,20 @@ export const boroughDropdown = () => {
       }); // corresponding value returned by the button
   }
 };
+
+export const hardcodedWidth = (borough) => {
+  switch (borough) {
+    case "NYC":
+      return "17ch";
+    case "Bronx":
+      return "11ch";
+    case "Brooklyn":
+      return "10ch";
+    case "Queens":
+      return "8.25ch";
+    case "Staten Island":
+      return "13.2ch";
+    default:
+      break;
+  }
+};

@@ -2,7 +2,7 @@ const axios = require("axios");
 import { renderMap } from "./map.js";
 import { medianSales } from "./sales_line_graph";
 import { appendBubblesToMap } from "./bubbles";
-import { boroughDropdown } from "./application";
+import { boroughDropdown, hardcodedWidth } from "./application";
 
 document.addEventListener("DOMContentLoaded", () => {
   boroughDropdown();
@@ -27,6 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
         lineGraphFacts[i].removeChild(lineGraphFacts[i].lastElementChild);
       }
     }
+
+    // hardcodedWidth(
+    //   lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
+    // );
+
+    let headerDropDown = document.querySelector(".header-dropdown");
+    headerDropDown.style.width = hardcodedWidth(
+      lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
+    );
+    // headerDropDown.setAttribute("width", "2ch");
+    // debugger;
 
     appendBubblesToMap(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value

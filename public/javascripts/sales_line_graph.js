@@ -213,16 +213,6 @@ export const medianSales = (area = "NYC", numYears) =>
                 (Math.abs(calculatedNum) / 1000000).toFixed(2) +
               "M";
       };
-      // const avgOf2021MedianSales =
-      //   "$" +
-      //   `${(
-      //     data
-      //       .slice(data.length - (data.length - 12 * (2021 - 2010))) // 11 stands for 2021 - 2010
-      //       .reduce((acc, d) => acc + d.value, 0) /
-      //     data.slice(data.length - (data.length - 12 * (2021 - 2010))).length /
-      //     1000
-      //   ).toFixed(0)}` +
-      //   "k";
 
       const lineGraphHeader = document.querySelector(".line-graph-header");
       lineGraphHeader.textContent = "Median Sales";
@@ -250,7 +240,3 @@ export const medianSales = (area = "NYC", numYears) =>
 
       chart();
     });
-
-// const salesFacts = () => {
-//   const facts = document.querySelector(".facts");
-// };

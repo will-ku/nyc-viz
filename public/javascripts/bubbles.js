@@ -45,8 +45,6 @@ export const appendBubblesToMap = (
       })
       .reverse()
       .slice(0, numBubbles);
-
-    // console.log(highVolNbhdArr);
     // Object representation of high volume neighborhood array (highVolNbdhArr)
     const highVolNbhdObj = {};
     highVolNbhdArr.map((ele) => (highVolNbhdObj[ele[0]] = ele[1]));
