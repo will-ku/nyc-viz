@@ -2533,16 +2533,32 @@ const medianSales = (area = "NYC", numYears) =>
           100
         ).toFixed(2)}` + "%";
 
-      const avgOf2021MedianSales =
-        "$" +
-        `${(
+      const avgOf2021MedianSales = () => {
+        let calculatedNum =
           data
             .slice(data.length - (data.length - 12 * (2021 - 2010))) // 11 stands for 2021 - 2010
             .reduce((acc, d) => acc + d.value, 0) /
-          data.slice(data.length - (data.length - 12 * (2021 - 2010))).length /
-          1000
-        ).toFixed(0)}` +
-        "k";
+          data.slice(data.length - (data.length - 12 * (2021 - 2010))).length;
+        return Math.abs(calculatedNum) < 999999
+          ? "$" +
+              Math.sign(calculatedNum) *
+                (Math.abs(calculatedNum) / 1000).toFixed(2) +
+              "k"
+          : "$" +
+              Math.sign(calculatedNum) *
+                (Math.abs(calculatedNum) / 1000000).toFixed(2) +
+              "M";
+      };
+      // const avgOf2021MedianSales =
+      //   "$" +
+      //   `${(
+      //     data
+      //       .slice(data.length - (data.length - 12 * (2021 - 2010))) // 11 stands for 2021 - 2010
+      //       .reduce((acc, d) => acc + d.value, 0) /
+      //     data.slice(data.length - (data.length - 12 * (2021 - 2010))).length /
+      //     1000
+      //   ).toFixed(0)}` +
+      //   "k";
 
       const lineGraphHeader = document.querySelector(".line-graph-header");
       lineGraphHeader.textContent = "Median Sales";
@@ -2560,7 +2576,7 @@ const medianSales = (area = "NYC", numYears) =>
 
       const factTwo = document.querySelector("#line-graph-fact-2");
       const factTwoDiv = document.createElement("div");
-      factTwoDiv.textContent = avgOf2021MedianSales;
+      factTwoDiv.textContent = avgOf2021MedianSales();
       factTwoDiv.setAttribute("class", "fact-num");
       factTwo.append(factTwoDiv);
       const factTwoDetails = document.createElement("div");
