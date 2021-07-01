@@ -2348,8 +2348,9 @@ const medianSales = (area = "NYC") =>
 
       // building data object
       data = Object.entries(boroughPrices).map((entry) => {
+        let parseDates = d3.timeParse("%Y-%m");
         return {
-          date: new Date(entry[0].replace(/-/g, "/")),
+          date: parseDates(entry[0]),
           value: parseInt(entry[1]),
         };
       });
@@ -2473,6 +2474,7 @@ const medianSales = (area = "NYC") =>
 
         svg.append("g").call(xAxis);
         svg.append("g").call(yAxis);
+        // debugger;
         svg
           .append("path")
           .datum(data)
@@ -2499,18 +2501,15 @@ const medianSales = (area = "NYC") =>
         return svg.node();
       }
 
-
       chart();
     });
 /* harmony export (immutable) */ __webpack_exports__["a"] = medianSales;
 
 
 const salesFacts = () => {
-  const facts = document.querySelector(".facts")
+  const facts = document.querySelector(".facts");
+};
 
-  
-
-}
 
 /***/ })
 /******/ ]);
