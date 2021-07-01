@@ -1221,14 +1221,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const currBubbles = document.querySelector(".bubble");
     currBubbles.remove();
 
-    // const lineGraphFacts = document.querySelectorAll(".line-graph-fact");
-    // for (let i = lineGraphFacts.length - 1; i > 0; i--) {
-    //   if (lineGraphFacts[i].childNodes) {
-    //     for (let j = lineGraphFacts[i].childNodes.length - 1; j > 0; j--) {
-    //       lineGraphFacts[i].childNodes[j].remove();
-    //     }
-    //   }
-    // }
+    const lineGraphFacts = document.querySelectorAll(".line-graph-fact");
+
+    for (let i = lineGraphFacts.length - 1; i > 0; i--) {
+      if (lineGraphFacts[i].childNodes) {
+        for (let j = lineGraphFacts[i].childNodes.length - 1; j > 0; j--) {
+          if (lineGraphFacts[i].childNodes[j]) {
+            lineGraphFacts[i].childNodes[j].remove();
+          } else {
+            break;
+          }
+        }
+      }
+    }
 
     // const factNumbersArr = document.querySelectorAll(".fact-num");
     // const factDetailsArr = document.querySelectorAll(".fact-details");
