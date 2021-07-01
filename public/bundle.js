@@ -1197,6 +1197,8 @@ const hardcodedWidth = (borough) => {
       return "8.25ch";
     case "Staten Island":
       return "13.2ch";
+    case "Manhattan":
+      return "11.25ch";
     default:
       break;
   }
