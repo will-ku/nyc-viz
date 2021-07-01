@@ -218,7 +218,7 @@ export const medianSales = (area = "NYC", numYears) =>
       factOne.append(factOneDiv);
       const factOneDetails = document.createElement("div");
       factOneDetails.textContent =
-        "Percentage increase from January 2010 to May 2021.";
+        "Percentage median sales price increase from January 2010 to May 2021.";
       factOneDetails.setAttribute("class", "fact-details");
       factOne.append(factOneDetails);
 
