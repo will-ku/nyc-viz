@@ -16,9 +16,16 @@
     <link rel="stylesheet" href="./public/styles/line_graph.css" />
   </head>
   <body>
-    <div class="cover-container">
+    <section class="cover-container">
       <header id="nav-header">
         <!-- <img src="https://img.icons8.com/ios-filled/50/000000/angelist.png" /> -->
+        <a href="mailto:william.ku9192@gmail.com"
+          ><img
+            class="header-icon"
+            style="width: 46px; opacity: 0.95"
+            src="./public/styles/email_icon.png"
+            title="Email me!"
+        /></a>
         <a href="https://angel.co/u/will-ku"
           ><img
             style="width: 50px"
@@ -39,16 +46,20 @@
             title="LinkedIn"
         /></a>
       </header>
-      <section class="cover-page">
+      <div class="cover-page">
         <h1>NYC Viz</h1>
         <p>
-          NYC Viz is a data visualization application that utilizes D3.js to
-          provide a fun way to interact with the absurdly high cost of living in
-          New York City. Historical monthly data is provided by StreetEasy.
+          NYC Viz is a data visualization project that utilizes D3.js to provide
+          a fun way to interact with the absurdly high cost of living in New
+          York City. Historical monthly data is provided by StreetEasy.
+          <br /><br />
+          In this application, you will be able to view median sales and sales
+          volume trends throughout the city.
         </p>
-      </section>
-    </div>
-    <main id="main">
+        <a id="scroll-to-start" href="#main">Let's Get Started</a>
+      </div>
+    </section>
+    <section id="main">
       <header id="content-header">
         Viewing
         <select id="borough-dropdown" class="header-dropdown"></select>
@@ -71,6 +82,6 @@
           </svg>
         </section>
       </section>
-    </main>
+    </section>
   </body>
 </html>

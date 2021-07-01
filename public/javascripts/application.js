@@ -20,4 +20,3 @@ export const boroughDropdown = () => {
       }); // corresponding value returned by the button
   }
 };
-

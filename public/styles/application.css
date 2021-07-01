@@ -1,9 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap");
 
+section {
+  scroll-behavior: smooth;
+}
+
 #nav-header {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  align-self: center;
   margin: 0 2rem;
   height: 3rem;
   padding-top: 0.75rem;
@@ -18,6 +25,9 @@
   padding-left: 1rem;
   height: 2rem;
   opacity: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #nav-header > a:hover {
@@ -42,7 +52,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 7rem;
+  margin-top: 8rem;
 }
 .cover-page h1 {
   font-size: 10rem;
@@ -57,43 +67,44 @@ body,
 
 .cover-page > p {
   text-align: center;
-  width: 50ch;
+  width: 52ch;
   color: rgb(255, 255, 255);
-  font-size: 1.2rem;
-  font-weight: 300;
+  font-size: 1.1rem;
+  font-weight: 400;
   line-height: 1.2;
-  text-shadow: 0 0 2px #000000;
+  text-shadow: 5px 5px 20px #000000;
+  margin-bottom: 4em;
 }
 
-main {
+#main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
 }
-
-#content-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.25em 0;
-  height: 3rem;
-  position: sticky;
-  top: 0px;
-  font-family: "DM Serif Display", serif;
-  font-size: 2.5rem;
-  -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.02);
-  -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.02);
-  box-shadow: 0 3px 5px rgba(57, 63, 72, 0.02);
-  margin-bottom: 2rem;
-}
-
 .content-container {
   /* height: 100vh; */
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2.3rem;
+}
+
+#content-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4em 0;
+  height: 3rem;
+  position: sticky;
+  top: 0px;
+  font-family: "DM Serif Display", serif;
+  font-size: 2.3rem;
+  -webkit-box-shadow: 0 6px 10px rgba(57, 63, 72, 0.03);
+  -moz-box-shadow: 0 6px 10px rgba(57, 63, 72, 0.03);
+  box-shadow: 0 6px 10px rgba(57, 63, 72, 0.03);
+  margin-bottom: 2rem;
 }
 
 .header-dropdown {
@@ -118,4 +129,22 @@ main {
 
 .header-dropdown:hover {
   cursor: pointer;
+}
+
+#scroll-to-start {
+  text-decoration: none;
+  border-radius: 20px;
+  padding: 0.8em;
+  background-color: lightgray;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  background-color: rgba(40, 40, 40, 0.923);
+  -moz-box-shadow: 5px 6px 10px rgba(57, 63, 72, 0.2);
+  box-shadow: 5px 6px 10px rgba(57, 63, 72, 0.2);
+}
+
+#scroll-to-start:hover {
+  transform: scale(1.1);
+  transition: all ease 500ms;
 }
