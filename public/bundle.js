@@ -1218,12 +1218,20 @@ document.addEventListener("DOMContentLoaded", () => {
     Object(__WEBPACK_IMPORTED_MODULE_1__sales_line_graph__["a" /* medianSales */])(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
-
     const currBubbles = document.querySelector(".bubble");
     currBubbles.remove();
 
-    const factNumbersArr = document.querySelectorAll(".fact-num");
-    const factDetailsArr = document.querySelectorAll(".fact-details");
+    // const lineGraphFacts = document.querySelectorAll(".line-graph-fact");
+    // for (let i = lineGraphFacts.length - 1; i > 0; i--) {
+    //   if (lineGraphFacts[i].childNodes) {
+    //     for (let j = lineGraphFacts[i].childNodes.length - 1; j > 0; j--) {
+    //       lineGraphFacts[i].childNodes[j].remove();
+    //     }
+    //   }
+    // }
+
+    // const factNumbersArr = document.querySelectorAll(".fact-num");
+    // const factDetailsArr = document.querySelectorAll(".fact-details");
     // while (factNumbersArr[0]) {
     //   factNumbersArr[0];
     // }
