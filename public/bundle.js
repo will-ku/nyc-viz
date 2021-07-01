@@ -2571,7 +2571,7 @@ const medianSales = (area = "NYC", numYears) =>
         return Math.abs(calculatedNum) < 999999
           ? "$" +
               Math.sign(calculatedNum) *
-                (Math.abs(calculatedNum) / 1000).toFixed(2) +
+                (Math.abs(calculatedNum) / 1000).toFixed(1) +
               "k"
           : "$" +
               Math.sign(calculatedNum) *
