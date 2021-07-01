@@ -1222,26 +1222,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const lineGraphFacts = document.querySelectorAll(".line-graph-fact");
 
-    for (let i = lineGraphFacts.length - 1; i > 0; i--) {
-      if (lineGraphFacts[i].childNodes) {
-        for (let j = lineGraphFacts[i].childNodes.length - 1; j > 0; j--) {
-          if (lineGraphFacts[i].childNodes[j]) {
-            lineGraphFacts[i].childNodes[j].remove();
-          } else {
-            break;
-          }
-        }
+    for (let i = lineGraphFacts.length - 1; i > -1; i--) {
+      while (lineGraphFacts[i].childNodes.length > 0) {
+        // debugger;
+        lineGraphFacts[i].removeChild(lineGraphFacts[i].lastElementChild);
       }
     }
 
-    // const factNumbersArr = document.querySelectorAll(".fact-num");
-    // const factDetailsArr = document.querySelectorAll(".fact-details");
-    // while (factNumbersArr[0]) {
-    //   factNumbersArr[0];
-    // }
-
-    // factNumbers.remove();
-    // factDetails.remove();
     Object(__WEBPACK_IMPORTED_MODULE_2__bubbles__["a" /* appendBubblesToMap */])(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
@@ -2567,7 +2554,7 @@ const medianSales = (area = "NYC", numYears) =>
       factOne.append(factOneDiv);
       const factOneDetails = document.createElement("div");
       factOneDetails.textContent =
-        "Percentage increase from January 2010 to May 2021.";
+        "Percentage median sales price increase from January 2010 to May 2021.";
       factOneDetails.setAttribute("class", "fact-details");
       factOne.append(factOneDetails);
 
