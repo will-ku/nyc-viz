@@ -2327,7 +2327,7 @@ const renderMap = () => {
 
 
 
-const medianSales = (area = "NYC") =>
+const medianSales = (area = "NYC", numYears) =>
   d3
     .csv(
       "https://gist.githubusercontent.com/will-ku/87dc16f167af2d117ada33035c425d17/raw/08c396370ad39588f38fd6c79f6b1252d4def2e6/medianSalesPrice_All.csv"
@@ -2355,7 +2355,7 @@ const medianSales = (area = "NYC") =>
         };
       });
       const margin = { top: 20, right: 30, bottom: 45, left: 55 };
-      const height = 600;
+      const height = 450;
       const width = 700;
 
       const bisect = function (mx) {
@@ -2429,11 +2429,20 @@ const medianSales = (area = "NYC") =>
             .tickSizeOuter(2)
         );
 
+      // const prefix = d3.formatPrefix(1.21e6);
+
       const yAxis = (g) =>
         g
           .attr("transform", `translate(${margin.left},0)`)
-          .call(d3.axisLeft(y))
-          .call(d3.axisLeft(y))
+          .call(
+            d3
+              .axisLeft(y)
+              .ticks(7)
+              .tickFormat((d) => {
+                let formatValue = d3.format(".2s");
+                return formatValue(d);
+              })
+          )
           .call((g) => g.select(".domain").remove())
           .call((g) =>
             g
@@ -2454,7 +2463,11 @@ const medianSales = (area = "NYC") =>
 
       const y = d3
         .scaleLinear()
-        .domain([0, d3.max(data, (d) => d.value)])
+        .domain([
+          d3.min(data, (d) => d.value - 100000),
+          d3.max(data, (d) => d.value),
+        ])
+        // .domain([0, d3.max(data, (d) => d.value)])
         // .domain([200000, 1500000])
         .nice()
         .range([height - margin.bottom, margin.top]);

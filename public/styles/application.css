@@ -61,5 +61,6 @@ header {
   border: none;
   background-color: transparent;
   width: auto;
+  white-space: nowrap;
   /* appearance: none; */
 }
