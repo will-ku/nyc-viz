@@ -25,8 +25,9 @@
   /* text-shadow: 0 0 5px #00000007; */
 }
 
-body {
-  background-color: rgb(255, 248, 241);
+body,
+#content-header {
+  background-color: rgb(251, 246, 240);
 }
 
 .cover-page > p {
@@ -43,18 +44,31 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  width: 100%;
 }
 
-header {
+#content-header {
   display: flex;
   justify-content: center;
-  padding-top: 0.5em;
+  align-items: center;
+  padding: 0.25em 0;
+  height: 3rem;
+  position: sticky;
+  top: 0px;
+  font-family: "DM Serif Display", serif;
+  font-size: 2.5rem;
+  -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.02);
+  -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.02);
+  box-shadow: 0 3px 5px rgba(57, 63, 72, 0.02);
+  margin-bottom: 2rem;
 }
 
-.content-page {
-  height: 95vh;
+.content-container {
+  /* height: 100vh; */
   width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header-dropdown {
@@ -62,5 +76,17 @@ header {
   background-color: transparent;
   width: auto;
   white-space: nowrap;
-  /* appearance: none; */
+  outline: none;
+  padding: 0;
+  padding-left: 0.5rem;
+  font-family: "DM Serif Display", serif;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
+}
+
+.header-dropdown:active {
+  font-size: 1rem;
 }

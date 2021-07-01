@@ -9,7 +9,7 @@
   position: absolute;
   text-align: center;
   padding: 3px;
-  font: 12px sans-serif;
+  font: 14px sans-serif;
   /* font-weight: 700; */
   background: #fff;
   border: 0px;
@@ -21,6 +21,7 @@
 .bubble {
   fill-opacity: 0.5;
   stroke: #fff;
+  /* fill: #19bdd2; */
   fill: orange;
   stroke-width: 0.5px;
 }
@@ -29,7 +30,7 @@
   position: absolute;
   text-align: center;
   padding: 3px;
-  font: 12px sans-serif;
+  font: 14px sans-serif;
   /* font-weight: 700; */
   background: #fff;
   border: 0px;
@@ -37,5 +38,4 @@
   pointer-events: none;
   opacity: 0;
   z-index: 2;
-
 }

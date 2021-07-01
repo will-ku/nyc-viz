@@ -1176,6 +1176,7 @@ const boroughDropdown = () => {
       .attr("class", "curr-borough-dropdown")
       .text(function (d) {
         if (d === "NYC") return "All New York City";
+        if (d === "Bronx") return "The Bronx";
         return d;
       }) // text showed in the menu
       .attr("value", function (d) {
@@ -1184,6 +1185,7 @@ const boroughDropdown = () => {
   }
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = boroughDropdown;
+
 
 
 
@@ -1216,9 +1218,18 @@ document.addEventListener("DOMContentLoaded", () => {
     Object(__WEBPACK_IMPORTED_MODULE_1__sales_line_graph__["a" /* medianSales */])(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
+    debugger;
     const currBubbles = document.querySelector(".bubble");
     currBubbles.remove();
 
+    const factNumbersArr = document.querySelectorAll(".fact-num");
+    const factDetailsArr = document.querySelectorAll(".fact-details");
+    // while (factNumbersArr[0]) {
+    //   factNumbersArr[0];
+    // }
+
+    // factNumbers.remove();
+    // factDetails.remove();
     Object(__WEBPACK_IMPORTED_MODULE_2__bubbles__["a" /* appendBubblesToMap */])(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
@@ -2354,7 +2365,7 @@ const medianSales = (area = "NYC", numYears) =>
           value: parseInt(entry[1]),
         };
       });
-      const margin = { top: 20, right: 30, bottom: 45, left: 55 };
+      const margin = { top: 20, right: 60, bottom: 45, left: 55 };
       const height = 450;
       const width = 700;
 
@@ -2370,7 +2381,6 @@ const medianSales = (area = "NYC", numYears) =>
       function formatDate(date) {
         return date.toLocaleString("en", {
           month: "short",
-          day: "numeric",
           year: "numeric",
           timeZone: "UTC",
         });
@@ -2409,6 +2419,7 @@ const medianSales = (area = "NYC", numYears) =>
               .attr("x", 0)
               .attr("y", (d, i) => `${i * 1.1}em`)
               .style("font-weight", (_, i) => (i ? null : "bold"))
+              .style("font-size", "0.9rem")
               .text((d) => d)
           );
 
@@ -2492,8 +2503,9 @@ const medianSales = (area = "NYC", numYears) =>
           .append("path")
           .datum(data)
           .attr("fill", "none")
-          .attr("stroke", "steelblue")
-          .attr("stroke-width", 1.5)
+          .attr("stroke", "orange")
+          // .attr("stroke", "#079FB4")
+          .attr("stroke-width", 2)
           .attr("stroke-linejoin", "round")
           .attr("stroke-lincap", "round")
           .attr("d", line);
@@ -2514,14 +2526,57 @@ const medianSales = (area = "NYC", numYears) =>
         return svg.node();
       }
 
+      // Line Graph facts
+
+      const percentIncreaseSinceTwentyTen =
+        `${(
+          ((data[data.length - 1].value - data[0].value) / data[0].value) *
+          100
+        ).toFixed(2)}` + "%";
+
+      const avgOf2021MedianSales =
+        "$" +
+        `${(
+          data
+            .slice(data.length - (data.length - 12 * (2021 - 2010))) // 11 stands for 2021 - 2010
+            .reduce((acc, d) => acc + d.value, 0) /
+          data.slice(data.length - (data.length - 12 * (2021 - 2010))).length /
+          1000
+        ).toFixed(0)}` +
+        "k";
+
+      const lineGraphHeader = document.querySelector(".line-graph-header");
+      lineGraphHeader.textContent = "Median Sales";
+
+      const factOne = document.querySelector("#line-graph-fact-1");
+      const factOneDiv = document.createElement("div");
+      factOneDiv.textContent = percentIncreaseSinceTwentyTen;
+      factOneDiv.setAttribute("class", "fact-num");
+      factOne.append(factOneDiv);
+      const factOneDetails = document.createElement("div");
+      factOneDetails.textContent =
+        "Percentage increase from January 2010 to May 2021.";
+      factOneDetails.setAttribute("class", "fact-details");
+      factOne.append(factOneDetails);
+
+      const factTwo = document.querySelector("#line-graph-fact-2");
+      const factTwoDiv = document.createElement("div");
+      factTwoDiv.textContent = avgOf2021MedianSales;
+      factTwoDiv.setAttribute("class", "fact-num");
+      factTwo.append(factTwoDiv);
+      const factTwoDetails = document.createElement("div");
+      factTwoDetails.textContent = "Average of median sales prices YTD.";
+      factTwoDetails.setAttribute("class", "fact-details");
+      factTwo.append(factTwoDetails);
+
       chart();
     });
 /* harmony export (immutable) */ __webpack_exports__["a"] = medianSales;
 
 
-const salesFacts = () => {
-  const facts = document.querySelector(".facts");
-};
+// const salesFacts = () => {
+//   const facts = document.querySelector(".facts");
+// };
 
 
 /***/ })

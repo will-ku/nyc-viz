@@ -12,6 +12,7 @@ export const boroughDropdown = () => {
       .attr("class", "curr-borough-dropdown")
       .text(function (d) {
         if (d === "NYC") return "All New York City";
+        if (d === "Bronx") return "The Bronx";
         return d;
       }) // text showed in the menu
       .attr("value", function (d) {
@@ -19,3 +20,4 @@ export const boroughDropdown = () => {
       }); // corresponding value returned by the button
   }
 };
+

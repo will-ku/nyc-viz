@@ -1,7 +1,10 @@
-.line-graph {
+.line-graph-container {
   display: flex;
-  flex-direction: column;
-  min-width: 45rem;
+}
+
+.line-graph {
+  min-width: 35rem;
+  width: 45rem;
   margin-left: 1rem;
 }
 
@@ -11,5 +14,32 @@
   shape-rendering: crispEdges;
   fill: none;
   stroke: steelblue;
-  stroke-width: 1rem;
+  /* stroke-width: 1rem; */
+}
+
+.line-graph-header {
+  padding-left: 1em;
+}
+
+.line-graph-fact {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+  flex-wrap: wrap;
+}
+
+.fact-num {
+  font-family: "DM Serif Display", serif;
+  font-size: 4.5rem;
+  font-weight: 1000;
+  font-family: arial black;
+  color: black;
+}
+
+.fact-details {
+  flex-basis: 0;
+  max-width: 30ch;
+  text-align: center;
+  color: gray;
 }
