@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./public/styles/line_graph.css" />
   </head>
   <body>
+    <!-- <header id="nav-header">Nav header</header> -->
     <section class="cover-page">
       <h1>NYC Viz</h1>
       <p>
@@ -26,9 +27,13 @@
     </section>
     <main id="main">
       <header>
-        <section><select id="borough-dropdown"></select></section>
+        <section>
+          Viewing
+          <select id="borough-dropdown" class="header-dropdown"></select>
+        </section>
       </header>
       <section class="content-page">
+        <section class="line-graph">Median sales price</section>
         <section class="map-container">
           Highest sales volume over the past 5 years
           <svg id="nyc-map" width="500" height="720"></svg>
@@ -36,7 +41,6 @@
           <div id="neighborhoodPopover"></div>
           <div id="bubblePopover"></div>
         </section>
-        <section class="line-graph">Median sales price</section>
         <div className="facts"></div>
       </section>
     </main>

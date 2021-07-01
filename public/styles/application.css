@@ -1,6 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap");
 
+/* #nav-header {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.67);
+  position: fixed;
+  width: 100%;
+} */
+
 .cover-page {
   padding-top: 1rem;
   display: flex;
@@ -18,10 +25,14 @@
   /* text-shadow: 0 0 5px #00000007; */
 }
 
+body {
+  background-color: rgb(255, 248, 241);
+}
+
 .cover-page > p {
   text-align: center;
   width: 50ch;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.2;
@@ -31,7 +42,6 @@
 main {
   display: flex;
   flex-direction: column;
-  margin: 1em;
   justify-content: space-around;
 }
 
@@ -43,5 +53,13 @@ header {
 
 .content-page {
   height: 95vh;
+  width: 100%;
   display: flex;
+}
+
+.header-dropdown {
+  border: none;
+  background-color: transparent;
+  width: auto;
+  /* appearance: none; */
 }

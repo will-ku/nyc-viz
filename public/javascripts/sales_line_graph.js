@@ -128,8 +128,8 @@ export const medianSales = (area = "NYC") =>
 
       const y = d3
         .scaleLinear()
-        // .domain([0, d3.max(data, (d) => d.value)])
-        .domain([200000, 1500000])
+        .domain([0, d3.max(data, (d) => d.value)])
+        // .domain([200000, 1500000])
         .nice()
         .range([height - margin.bottom, margin.top]);
 
@@ -148,7 +148,7 @@ export const medianSales = (area = "NYC") =>
 
         svg.append("g").call(xAxis);
         svg.append("g").call(yAxis);
-        // debugger;
+
         svg
           .append("path")
           .datum(data)
