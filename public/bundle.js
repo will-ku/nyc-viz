@@ -1218,7 +1218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     Object(__WEBPACK_IMPORTED_MODULE_1__sales_line_graph__["a" /* medianSales */])(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
-    debugger;
+
     const currBubbles = document.querySelector(".bubble");
     currBubbles.remove();
 

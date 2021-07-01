@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     medianSales(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
-    debugger;
+
     const currBubbles = document.querySelector(".bubble");
     currBubbles.remove();
 

@@ -90,3 +90,7 @@ main {
 .header-dropdown:active {
   font-size: 1rem;
 }
+
+.header-dropdown:hover {
+  cursor: pointer;
+}
