@@ -19,6 +19,8 @@
 
 .line-graph-header {
   padding-left: 1em;
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
 }
 
 .line-graph-fact {
@@ -39,7 +41,7 @@
 
 .fact-details {
   flex-basis: 0;
-  max-width: 30ch;
+  max-width: 34ch;
   text-align: center;
   color: gray;
 }

@@ -57,6 +57,7 @@ section {
 .cover-page h1 {
   font-size: 10rem;
   color: white;
+  text-decoration-line: none;
   text-shadow: 0 0 5px #00000053;
 }
 
@@ -120,7 +121,7 @@ body,
   padding: 0;
   padding-left: 0.5rem;
   font-family: "DM Serif Display", serif;
-  /* appearance: none;
+  /* appearance: inherit;
   -webkit-appearance: none;
   -moz-appearance: none; */
   text-decoration: underline;

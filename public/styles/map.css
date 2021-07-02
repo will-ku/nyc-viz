@@ -64,6 +64,8 @@
 
 .map-graph-header {
   padding-left: 1.1em;
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
 }
 
 .map-li {
