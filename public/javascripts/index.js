@@ -41,6 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
 
+    let mapFactMessage = document.querySelector(".map-fact-message");
+    mapFactMessage.remove();
+
     appendBubblesToMap(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );

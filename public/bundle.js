@@ -1300,6 +1300,9 @@ document.addEventListener("DOMContentLoaded", () => {
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
 
+    let mapFactMessage = document.querySelector(".map-fact-message");
+    mapFactMessage.remove();
+
     Object(__WEBPACK_IMPORTED_MODULE_2__bubbles__["a" /* appendBubblesToMap */])(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
