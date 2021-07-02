@@ -28,16 +28,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // hardcodedWidth(
-    //   lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
-    // );
+    const mapFacts = document.querySelectorAll(".map-graph-fact");
+
+    for (let i = mapFacts.length - 1; i > -1; i--) {
+      while (mapFacts[i].childNodes.length > 0) {
+        mapFacts[i].removeChild(mapFacts[i].lastElementChild);
+      }
+    }
 
     let headerDropDown = document.querySelector(".header-dropdown");
     headerDropDown.style.width = hardcodedWidth(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value
     );
-    // headerDropDown.setAttribute("width", "2ch");
-    // debugger;
 
     appendBubblesToMap(
       lineGraphDropdown.options[lineGraphDropdown.selectedIndex].value

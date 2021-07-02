@@ -3,7 +3,7 @@ import { boroughs, nycMap, salesVolume, mappableNeighborhood } from "./util";
 export const appendBubblesToMap = (
   borough = "NYC",
   numYears = 5,
-  numBubbles = 10
+  numBubbles = 5
 ) => {
   Promise.all([d3.json(nycMap), d3.csv(salesVolume)]).then((promises) => {
     const [nyc, salesVolumeData] = promises;
@@ -45,6 +45,7 @@ export const appendBubblesToMap = (
       })
       .reverse()
       .slice(0, numBubbles);
+
     // Object representation of high volume neighborhood array (highVolNbdhArr)
     const highVolNbhdObj = {};
     highVolNbhdArr.map((ele) => (highVolNbhdObj[ele[0]] = ele[1]));
@@ -65,6 +66,7 @@ export const appendBubblesToMap = (
       }
     });
     // console.log(highVolFeatures);
+
     const radius = d3.scaleSqrt().domain([0, 5000]).range([0, 20]);
     const svg = d3.select("#nyc-map"),
       width = +svg.attr("width"),
@@ -131,5 +133,43 @@ export const appendBubblesToMap = (
           .text("")
           .remove();
       });
+    const mapFactHeader = document.querySelector(".map-graph-header");
+    mapFactHeader.textContent = "Highest Volume in Sales";
+    const mapUL = document.querySelector(".map-graph-fact");
+
+    if (borough === "Staten Island") {
+      let mapListItem = document.createElement("li");
+      mapListItem.setAttribute("class", "map-li");
+      mapUL.append(mapListItem);
+      let sorrySI = document.createElement("div");
+      sorrySI.setAttribute("class", "map-li-unavailable");
+      sorrySI.textContent =
+        "Oops, looks like we don't have any historical sales volume data for Staten Island yet. Sorry for the inconvenience 🥺";
+      mapListItem.append(sorrySI);
+    }
+
+    highVolNbhdArr.map((neighborhood) => {
+      let mapListItem = document.createElement("li");
+      mapListItem.setAttribute("class", "map-li");
+      mapUL.append(mapListItem);
+
+      let mapListItemNbd = document.createElement("div");
+      mapListItemNbd.setAttribute("class", "map-li-nbhd");
+      mapListItemNbd.textContent = neighborhood[0];
+
+      let mapListItemNum = document.createElement("div");
+      mapListItemNum.setAttribute("class", "map-li-num");
+      mapListItemNum.textContent = neighborhood[1];
+
+      mapListItem.append(mapListItemNbd);
+      mapListItem.append(mapListItemNum);
+    });
+
+    const mapFactSubContainer = document.querySelector(".map-fact-container");
+    const salesVolumeMessage = document.createElement("div");
+    salesVolumeMessage.setAttribute("class", "map-fact-message");
+    salesVolumeMessage.textContent =
+      "Sales volume is calculated by summing the past 5 years of monthly sales volume per neighborhood, as provided by StreetEasy. Sales volume data may not be available in all boroughs.";
+    mapFactSubContainer.append(salesVolumeMessage);
   });
 };

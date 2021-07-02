@@ -1,3 +1,7 @@
+.map-container {
+  display: flex;
+}
+
 .map-container path {
   stroke: rgb(238, 238, 238);
   stroke-width: 0.5;
@@ -38,4 +42,60 @@
   pointer-events: none;
   opacity: 0;
   z-index: 2;
+}
+
+.map-container {
+  margin-top: 5rem;
+  padding-bottom: 1rem;
+}
+
+.map-fact-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 27rem;
+}
+
+.map-fact-subcontainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.map-graph-header {
+  padding-left: 1.1em;
+}
+
+.map-li {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1.2rem;
+}
+
+.map-li-nbhd {
+  display: list-item;
+  font-family: "DM Serif Display", serif;
+  font-size: 2rem;
+  padding-right: 0.5rem;
+}
+
+.map-li-num {
+  font-family: arial black;
+  font-size: 2.2rem;
+  font-weight: 1000;
+  color: rgb(200, 200, 200);
+  font-style: italic;
+}
+
+.map-li-unavailable {
+  width: 40ch;
+  text-align: justify;
+}
+
+.map-fact-message {
+  text-align: justify;
+  padding-bottom: 3rem;
+  padding-left: 2rem;
+  width: 45ch;
+  color: gray;
 }

@@ -75,10 +75,17 @@
         </section>
         <section class="map-container">
           <div class="map-fact-container">
-            <h1 class="map-graph-header"></h1>
-            <div id="map-graph-fact-1" class="map-graph-fact"></div>
+            <div class="map-fact-subcontainer">
+              <h1 class="map-graph-header"></h1>
+              <ul class="map-graph-fact"></ul>
+            </div>
+            <!-- <div className="map-fact-message">
+              Sales volume is calculated by summing the past 5 years of monthly
+              sales volume per neighborhood, as provided by StreetEasy. Sales
+              volume data may not be available in all boroughs.
+            </div> -->
           </div>
-          <svg id="nyc-map" width="500" height="720">
+          <svg id="nyc-map" width="500" height="720" style="padding-left: 5rem">
             <div id="neighborhoodPopover"></div>
             <div id="bubblePopover"></div>
           </svg>
