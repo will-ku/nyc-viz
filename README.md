@@ -10,7 +10,7 @@ With the NYC Viz application, users will be able to:
 * View a map of New York City
 * View changes in median sales prices since 2010
 ![alt text](https://github.com/will-ku/nyc-viz/blob/main/public/styles/NYC%20Viz%20Median%20Prices.png)
-* View areas with the highest total sale volumes
+* View areas with the highest total sale volumes (over the past 5 years)
 ![alt text](https://github.com/will-ku/nyc-viz/blob/main/public/styles/NYC%20Viz%20Sales%20Volume.png)
 
 # Architecture and Technologies
