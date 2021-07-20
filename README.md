@@ -3,7 +3,7 @@
 ![alt text](https://github.com/will-ku/nyc-viz/blob/main/public/styles/NYC%20Viz%20Home.png)
 
 # Background
-NYC Viz is a high level overview of the real estate sales data in New York City since 2010. This project uses data visualization libraries such as D3.js to provide an interactive way to consume the information. View the live demo [here](https://will-ku.github.io/nyc-viz/).
+NYC Viz provides a high level overview of the real estate data in New York City since 2010. This project uses data visualization libraries such as D3.js to offer an interactive way to consume the information. Try out the live demo [here](https://will-ku.github.io/nyc-viz/)!
 
 # Functionality & MVP
 With the NYC Viz application, users will be able to:
