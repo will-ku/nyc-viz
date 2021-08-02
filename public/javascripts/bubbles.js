@@ -144,7 +144,7 @@ export const appendBubblesToMap = (
       let sorrySI = document.createElement("div");
       sorrySI.setAttribute("class", "map-li-unavailable");
       sorrySI.textContent =
-        "Oops, looks like we don't have any historical sales volume data for Staten Island yet. Sorry for the inconvenience! 🥺";
+        "Oops, we don't have any historical sales volume data for Staten Island yet. Sorry for the inconvenience! 🥺";
       mapListItem.append(sorrySI);
     }
 
