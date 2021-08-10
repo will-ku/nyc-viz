@@ -22,7 +22,7 @@ A line graph with tooltip is used to display monthly median sales prices in New 
 
 ![alt text](https://github.com/will-ku/nyc-viz/blob/main/public/styles/NYC%20Viz%20Median%20Prices.png)
 
-To accomplish this, median sales price data fetched from an external CSV using `d3.csv()` has to be cleaned and built into Javascript objects that can be rendered onto map.
+To accomplish this, median sales price data fetched from an external CSV using `d3.csv()` has to be scrubbed and built into a Javascript object defined by `data`.
 
 ```javascript
       let boroughPrices;
@@ -47,7 +47,26 @@ To accomplish this, median sales price data fetched from an external CSV using `
 
 ```
 
-The tooltip for the line graph will display when a user hovers over the graph.
+D3.js functions (`d3.scaleUtc()` and `d3.scaleLiner()`) were used to construct the _x_ and _y_ coordinates, respectively, from the scrubbed data. These coordinates are used to draw the line onto the graph.
+
+```javascript
+      const x = d3
+        .scaleUtc()
+        .domain(d3.extent(data, (d) => d.date))
+        .range([margin.left, width - margin.right]);
+
+      const y = d3
+        .scaleLinear()
+        .domain([
+          d3.min(data, (d) => d.value - 100000),
+          d3.max(data, (d) => d.value),
+        ])
+        .nice()
+        .range([height - margin.bottom, margin.top])
+ ```
+
+The tooltip for the line graph displays when a user hovers over the graph.
+
 ```javascript
 svg.on("touchmove mousemove", function (event) {
           const { date, value } = bisect(d3.pointer(event, this)[0]);
@@ -63,11 +82,9 @@ svg.on("touchmove mousemove", function (event) {
 ## Sales Volume
 Monthly sales volume data is overlaid onto a geoJSON map of New York City. Hovering over the map will expose a tooltip that displays the neighborhood you are hovering over.
 
-Orange bubbles represent the neighborhoods with the highest sales volumes over the past 5 years. The size of the bubble is directly related to the sales volume.
-
 ![alt text](https://github.com/will-ku/nyc-viz/blob/main/public/styles/NYC%20Viz%20Sales%20Volume.png)
 
-The map is constructed by fetching geoJSON data of New York City from an external source.
+GeoJSON data used for the map of New York City is provided by [BetaNYC](http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson).
 
 ```javascript
     const path = d3
@@ -81,7 +98,23 @@ The map is constructed by fetching geoJSON data of New York City from an externa
       );
 ```
 
-Bubbles only appear for the 5 neighborhoods with the highest volume in sales, based on the user's selection.
+Orange bubbles represent the 5 neighborhoods with the highest sales volumes over the past 5 years. The size of the bubble is directly related to the sales volume.
+
+```javascript
+svg
+      .append("g")
+      .attr("class", "bubble")
+      .selectAll("circle")
+      .data(highVolFeatures)
+      .enter()
+      .append("circle")
+      .attr("transform", function (d) {
+        return "translate(" + path.centroid(d) + ")";
+      })
+      .attr("r", (d) => radius(d.salesVol))
+```
+
+Two API calls (one to CSV containing StreetEasy's sales volume data, another to [BetaNYC's geoJSON data](http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson)) to obtain sales volume and map data. Once the promise resolves successfully, the data is scrubbed before total sales volume numbers are calculated.
 
 ```javascript
 // find all neighborhoods in borough (argument) and push object into boroughArr
@@ -121,6 +154,8 @@ Bubbles only appear for the 5 neighborhoods with the highest volume in sales, ba
       .slice(0, numBubbles);
 ```
 
+
+
 ## Filter by Borough
 By default, the application will display data for all of New York City. However, users have the option to filter down by a particular using a dropdown menu. An event listener will remove and re-render elements from the DOM to represent the user's selection.
 
@@ -133,3 +168,23 @@ const boroughSelection = document.querySelector("#borough-dropdown");
     const currBubbles = document.querySelector(".bubble");
     currBubbles.remove();
   ```
+  
+  To render the data based on selection, a helper function called `boroughDropdown()` was created.
+```javascript
+const boroughDropdown = () => {
+    d3.select("#borough-dropdown")
+      .selectAll("myOptions")
+      .data(boroughs)
+      .enter()
+      .append("option")
+      .attr("class", "curr-borough-dropdown")
+      .text(function (d) {
+        if (d === "NYC") return "All New York City";
+        if (d === "Bronx") return "The Bronx";
+        return d;
+      })
+      .attr("value", function (d) {
+        return d;
+      }); 
+}
+```
