@@ -1,11 +1,11 @@
 # NYC Viz
 
+### [Visit the live demo here!](https://will-ku.github.io/nyc-viz/)
+
 ![alt text](https://github.com/will-ku/nyc-viz/blob/main/public/styles/NYC%20Viz%20Home.png)
 
 # Background
 NYC Viz is a _data visualization application_ that provides a high level overview of the real estate data in New York City since 2010. This project uses Javascript library D3.js to offer an interactive way to consume the information. Users are able to analyze sales price and sales volume data. Users can also filter by borough or view data for all of New York City. All data is provided by [StreetEasy](https://streeteasy.com/blog/data-dashboard/?agg=Total&metric=Inventory&type=Sales&bedrooms=Any%20Bedrooms&property=Any%20Property%20Type&minDate=2010-01-01&maxDate=2021-06-01&area=Flatiron,Brooklyn%20Heights). 
-
-Have a look around! You can access the live demo [here](https://will-ku.github.io/nyc-viz/).
 
 # Technologies
 The project will be implemented with the following technologies:
