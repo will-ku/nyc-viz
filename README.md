@@ -3,7 +3,7 @@
 ![alt text](https://github.com/will-ku/nyc-viz/blob/main/public/styles/NYC%20Viz%20Home.png)
 
 # Background
-NYC Viz provides a high level overview of the real estate data in New York City since 2010. This project uses Javascript library D3.js to offer an interactive way to consume the information. Users are able to analyze sales price and sales volume data. Users can also filter by borough or view data for all of New York City. All data is provided by [StreetEasy](https://streeteasy.com/blog/data-dashboard/?agg=Total&metric=Inventory&type=Sales&bedrooms=Any%20Bedrooms&property=Any%20Property%20Type&minDate=2010-01-01&maxDate=2021-06-01&area=Flatiron,Brooklyn%20Heights). 
+NYC Viz is a _data visualization application_ that provides a high level overview of the real estate data in New York City since 2010. This project uses Javascript library D3.js to offer an interactive way to consume the information. Users are able to analyze sales price and sales volume data. Users can also filter by borough or view data for all of New York City. All data is provided by [StreetEasy](https://streeteasy.com/blog/data-dashboard/?agg=Total&metric=Inventory&type=Sales&bedrooms=Any%20Bedrooms&property=Any%20Property%20Type&minDate=2010-01-01&maxDate=2021-06-01&area=Flatiron,Brooklyn%20Heights). 
 
 Have a look around! You can access the live demo [here](https://will-ku.github.io/nyc-viz/).
 
@@ -114,7 +114,7 @@ svg
       .attr("r", (d) => radius(d.salesVol))
 ```
 
-Two API calls (one to CSV containing StreetEasy's sales volume data, another to [BetaNYC's geoJSON data](http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson)) to obtain sales volume and map data. Once the promise resolves successfully, the data is scrubbed before total sales volume numbers are calculated.
+To retrieve data for the map bubbles, two API calls (one to a CSV containing StreetEasy's sales volume data, another to [BetaNYC's geoJSON data](http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson)). A seperate call to the geoJSON object is required to give `d3.path` references to high volume sales neighborhoods. Once the promise resolves successfully, the data is scrubbed before total sales volume numbers are calculated.
 
 ```javascript
 // find all neighborhoods in borough (argument) and push object into boroughArr
