@@ -16,7 +16,7 @@ The project will be implemented with the following technologies:
 # Features
 
 ## Median Sales Prices
-A line graph with tooltip is used to display monthly median sales prices in New York City from January 2010 - May 2021. Users are able to:
+A line graph with tooltip is used to display monthly median sales prices in New York City from January 2010 - Sept 2022. Users are able to:
 * Filter by a specific borough or view all NYC
 * Hover over the line graph to view the median sales price for any particular month
 
