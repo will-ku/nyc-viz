@@ -439,12 +439,16 @@ const boroughs = [
 
 const nycMap =
   "https://gist.githubusercontent.com/will-ku/785bea3f2d9faaf7aa90c5c101062426/raw/6904b8580c10c7f69037cf4d6090e6929f1de785/nyc.json";
-/* harmony export (immutable) */ __webpack_exports__["c"] = nycMap;
+/* harmony export (immutable) */ __webpack_exports__["d"] = nycMap;
 
 
 const salesVolume =
   "https://gist.githubusercontent.com/will-ku/6738acd6b2988fc93d62166da77c7979/raw/3d7f1f8f20059270c5d555d9e54976aceb4555b0/recordSalesVolumeAll";
-/* harmony export (immutable) */ __webpack_exports__["d"] = salesVolume;
+/* harmony export (immutable) */ __webpack_exports__["e"] = salesVolume;
+
+
+const medianSalesPriceCSV = "https://gist.githubusercontent.com/will-ku/209695c4336d289906b4aeba31c00220/raw/c568992085b6d4087977c571413d5a4505d56265/medianSalesPrice_All.csv"
+/* harmony export (immutable) */ __webpack_exports__["c"] = medianSalesPriceCSV;
 
 
 const mappableNeighborhood = (name) => {
@@ -1022,7 +1026,7 @@ const appendBubblesToMap = (
   numYears = 5,
   numBubbles = 5
 ) => {
-  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_0__util__["c" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_0__util__["d" /* salesVolume */])]).then((promises) => {
+  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_0__util__["d" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_0__util__["e" /* salesVolume */])]).then((promises) => {
     const [nyc, salesVolumeData] = promises;
     let data = new Array();
     let boroughArr = new Array();
@@ -1161,7 +1165,7 @@ const appendBubblesToMap = (
       let sorrySI = document.createElement("div");
       sorrySI.setAttribute("class", "map-li-unavailable");
       sorrySI.textContent =
-        "Oops, looks like we don't have any historical sales volume data for Staten Island yet. Sorry for the inconvenience 🥺";
+        "Oops, we don't have any historical sales volume data for Staten Island yet. Sorry for the inconvenience! 🥺";
       mapListItem.append(sorrySI);
     }
 
@@ -2334,7 +2338,7 @@ module.exports = function isAxiosError(payload) {
 
 
 const renderMap = () => {
-  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_1__util__["c" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_1__util__["d" /* salesVolume */])]).then((promises) => {
+  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_1__util__["d" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_1__util__["e" /* salesVolume */])]).then((promises) => {
     const [nyc, medianSales] = promises;
 
     const svg = d3.select("#nyc-map"),
@@ -2411,10 +2415,11 @@ const renderMap = () => {
 
 
 
+
 const medianSales = (area = "NYC", numYears) =>
   d3
     .csv(
-      "https://gist.githubusercontent.com/will-ku/87dc16f167af2d117ada33035c425d17/raw/08c396370ad39588f38fd6c79f6b1252d4def2e6/medianSalesPrice_All.csv"
+      __WEBPACK_IMPORTED_MODULE_1__util__["c" /* medianSalesPriceCSV */]
     )
     .then((allData) => {
       let data = new Array();
@@ -2634,7 +2639,7 @@ const medianSales = (area = "NYC", numYears) =>
       factOne.append(factOneDiv);
       const factOneDetails = document.createElement("div");
       factOneDetails.textContent =
-        "Percentage median sales price increase from January 2010 to May 2021.";
+        "Percentage median sales price increase from January 2010 to September 2022.";
       factOneDetails.setAttribute("class", "fact-details");
       factOne.append(factOneDetails);
 
