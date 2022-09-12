@@ -442,9 +442,9 @@ const nycMap =
 /* harmony export (immutable) */ __webpack_exports__["d"] = nycMap;
 
 
-const salesVolume =
-  "https://gist.githubusercontent.com/will-ku/6738acd6b2988fc93d62166da77c7979/raw/3d7f1f8f20059270c5d555d9e54976aceb4555b0/recordSalesVolumeAll";
-/* harmony export (immutable) */ __webpack_exports__["e"] = salesVolume;
+const salesVolumeCSV =
+  "https://gist.githubusercontent.com/will-ku/28386b4e09f4f9a278cb98e041bf1143/raw/8b083f2b1c0c27949ea5fa9fb7037582f2cb974a/recordedSalesVolume_All.csv";
+/* harmony export (immutable) */ __webpack_exports__["e"] = salesVolumeCSV;
 
 
 const medianSalesPriceCSV = "https://gist.githubusercontent.com/will-ku/209695c4336d289906b4aeba31c00220/raw/c568992085b6d4087977c571413d5a4505d56265/medianSalesPrice_All.csv"
@@ -1026,7 +1026,7 @@ const appendBubblesToMap = (
   numYears = 5,
   numBubbles = 5
 ) => {
-  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_0__util__["d" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_0__util__["e" /* salesVolume */])]).then((promises) => {
+  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_0__util__["d" /* nycMap */]), d3.csv(salesVolume)]).then((promises) => {
     const [nyc, salesVolumeData] = promises;
     let data = new Array();
     let boroughArr = new Array();
@@ -2338,7 +2338,7 @@ module.exports = function isAxiosError(payload) {
 
 
 const renderMap = () => {
-  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_1__util__["d" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_1__util__["e" /* salesVolume */])]).then((promises) => {
+  Promise.all([d3.json(__WEBPACK_IMPORTED_MODULE_1__util__["d" /* nycMap */]), d3.csv(__WEBPACK_IMPORTED_MODULE_1__util__["e" /* salesVolumeCSV */])]).then((promises) => {
     const [nyc, medianSales] = promises;
 
     const svg = d3.select("#nyc-map"),
@@ -2639,7 +2639,7 @@ const medianSales = (area = "NYC", numYears) =>
       factOne.append(factOneDiv);
       const factOneDetails = document.createElement("div");
       factOneDetails.textContent =
-        "Percentage median sales price increase from January 2010 to September 2022.";
+        "Percentage median sales price increase from January 2010 to July 2022.";
       factOneDetails.setAttribute("class", "fact-details");
       factOne.append(factOneDetails);
 

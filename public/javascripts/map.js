@@ -1,8 +1,8 @@
-import { salesVolume } from "./bubbles";
-import { nycMap, salesVolume } from "./util";
+import { salesVolumeCSV } from "./bubbles";
+import { nycMap, salesVolumeCSV } from "./util";
 
 export const renderMap = () => {
-  Promise.all([d3.json(nycMap), d3.csv(salesVolume)]).then((promises) => {
+  Promise.all([d3.json(nycMap), d3.csv(salesVolumeCSV)]).then((promises) => {
     const [nyc, medianSales] = promises;
 
     const svg = d3.select("#nyc-map"),

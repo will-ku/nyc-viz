@@ -1,4 +1,4 @@
-import { boroughs, nycMap, salesVolume, mappableNeighborhood } from "./util";
+import { boroughs, nycMap, salesVolumeCSV, mappableNeighborhood } from "./util";
 
 export const appendBubblesToMap = (
   borough = "NYC",
